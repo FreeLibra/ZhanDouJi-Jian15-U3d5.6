@@ -11,9 +11,9 @@ public class XkPlayerTanKePaoTai : MonoBehaviour {
 	// Use this for initialization
 	void Start()
 	{
-		if (XkGameCtrl.GameJiTaiSt == GameJiTaiType.TanKeJiTai) {
-			PaoTaiRealObj.SetActive(false);
-		}
+//		if (XkGameCtrl.GameJiTaiSt == GameJiTaiType.TanKeJiTai) {
+//			PaoTaiRealObj.SetActive(false);
+//		}
 		PaoTaiTran = transform;
 
 		if (TKLvDai != null) {

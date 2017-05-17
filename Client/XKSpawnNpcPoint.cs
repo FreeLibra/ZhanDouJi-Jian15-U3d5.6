@@ -63,15 +63,15 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 			}
 			return;
 		}
-		else {
-			NetworkView netView = NpcObj.GetComponent<NetworkView>();
-			if (netView == null) {
-				Debug.LogWarning("npc cannot find NetworkView");
-				GameObject obj = null;
-				obj.name = "null";
-				return;
-			}
-		}
+//		else {
+//			NetworkView netView = NpcObj.GetComponent<NetworkView>();
+//			if (netView == null) {
+//				Debug.LogWarning("npc cannot find NetworkView");
+//				GameObject obj = null;
+//				obj.name = "null";
+//				return;
+//			}
+//		}
 
 		XKNpcMoveCtrl npcScript = NpcObj.GetComponent<XKNpcMoveCtrl>();
 		if (npcScript != null) {

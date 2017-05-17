@@ -65,7 +65,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 	bool IsDelayMovePlayer;
 	float TimeDelayMove;
 	Vector3 PlayerPosCur = new Vector3(0f, -1800f, 0f);
-	Quaternion PlayerRotCur;
+//	Quaternion PlayerRotCur;
 	bool IsPlayerTingLiu = true;
 	float TimeTingLiuVal;
 	float TimeTingLiuValStart;
@@ -74,7 +74,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 	int MarkCount;
 	public bool IsTestDrawPath;
 	XKPlayerAutoFire PlayerAutoFireScript;
-	NetworkView NetViewCom;
+//	NetworkView NetViewCom;
 	bool IsHandleRpc;
 	float TimeCheckAimNpcLast;
 	float[] TimeFireLast = new float[2];
@@ -127,7 +127,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 		PlayerObj = gameObject;
 		PlayerTran = transform;
 		AimSpawnPoint = new List<XKSpawnNpcPoint>();
-		NetViewCom = GetComponent<NetworkView>();
+//		NetViewCom = GetComponent<NetworkView>();
 //		if ((XkGameCtrl.GameModeVal == GameMode.LianJi && Network.peerType == NetworkPeerType.Disconnected)
 //		    || XkGameCtrl.GameModeVal != GameMode.LianJi) {
 //			NetViewCom.enabled = false;
@@ -275,7 +275,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 		}
 		
 		PlayerTran.position = PlayerPosCur;
-		PlayerTran.rotation = PlayerRotCur;
+//		PlayerTran.rotation = PlayerRotCur;
 	}
 
 	void SendPlayerTransformInfo()
@@ -298,15 +298,15 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 		if (Network.peerType != NetworkPeerType.Server) {
 			return;
 		}
-		NetViewCom.RPC("XKPlayerSendOtherTranformInfo", RPCMode.OthersBuffered, PlayerTran.position, PlayerTran.rotation);
+//		NetViewCom.RPC("XKPlayerSendOtherTranformInfo", RPCMode.OthersBuffered, PlayerTran.position, PlayerTran.rotation);
 	}
 
-	[RPC] void XKPlayerSendOtherTranformInfo(Vector3 pos, Quaternion rot)
-	{
-		PlayerPosCur = pos;
-		PlayerRotCur = rot;
-		HandleNetPlayerTrInfo();
-	}
+//	[RPC] void XKPlayerSendOtherTranformInfo(Vector3 pos, Quaternion rot)
+//	{
+//		PlayerPosCur = pos;
+//		PlayerRotCur = rot;
+//		HandleNetPlayerTrInfo();
+//	}
 
 	public void StopMovePlayer()
 	{
@@ -911,13 +911,13 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 		#endif
 	}
 
-	[RPC] void XKPlayerSendSpawnAmmoParticle(int playerIndex, int particleIndex, Vector3 firePos)
-	{
-		if (PlayerAutoFireScript == null) {
-			return;
-		}
-		PlayerAutoFireScript.SpawnPlayerAmmoParticle(playerIndex, particleIndex, firePos);
-	}
+//	[RPC] void XKPlayerSendSpawnAmmoParticle(int playerIndex, int particleIndex, Vector3 firePos)
+//	{
+//		if (PlayerAutoFireScript == null) {
+//			return;
+//		}
+//		PlayerAutoFireScript.SpawnPlayerAmmoParticle(playerIndex, particleIndex, firePos);
+//	}
 	
 	public GameObject GetAimNpcObj()
 	{
@@ -1032,7 +1032,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 	{
 		SetPlayerHiddenArray();
 		if (Network.peerType != NetworkPeerType.Disconnected) {
-			NetViewCom.RPC("XKPlayerSendHandlePlayerHiddenArray", RPCMode.OthersBuffered);
+//			NetViewCom.RPC("XKPlayerSendHandlePlayerHiddenArray", RPCMode.OthersBuffered);
 		}
 	}
 	
@@ -1044,10 +1044,10 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 //		}
 	}
 	
-	[RPC] void XKPlayerSendHandlePlayerHiddenArray()
-	{
-		SetPlayerHiddenArray();
-	}
+//	[RPC] void XKPlayerSendHandlePlayerHiddenArray()
+//	{
+//		SetPlayerHiddenArray();
+//	}
 
 	/**
 	 * key == 1 -> 使主角摄像机依附于父级摄像机并且停止跟踪.

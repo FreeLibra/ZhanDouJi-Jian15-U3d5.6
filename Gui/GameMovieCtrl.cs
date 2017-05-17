@@ -463,12 +463,12 @@ public class GameMovieCtrl : MonoBehaviour {
 
 #if UNITY_EDITOR
 		return;
-#endif
-
+#else
 		if (!IsTestXiaoScreen) {
 			//Screen.SetResolution((int)XkGameCtrl.ScreenWidth, (int)XkGameCtrl.ScreenHeight, false);
 			MakeGameFullScreenView();
 		}
+#endif
 	}
 	
 	[DllImport("kernel32.dll")]

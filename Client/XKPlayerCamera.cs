@@ -531,7 +531,10 @@ public class XKPlayerCamera : MonoBehaviour {
 
 	public void SetAimTranInfo(AiMark markScript)
 	{
-		return;
+		if (XkGameCtrl.GetInstance().IsOpenVR) {
+			return;
+		}
+
 		if (AimNpcObj != null) {
 //			Debug.Log("SetAimTranInfo -> AimNpcObj should be null");
 			return;

@@ -23,10 +23,10 @@ public class BuJiBaoCtrl : MonoBehaviour {
 	[Range(0.1f, 30f)]public float DestroyTime = 2f;
 	bool IsDeath;
 	bool IsDelayDestroy;
-	NetworkView NetworkViewCom;
+//	NetworkView NetworkViewCom;
 	void Start()
 	{
-		NetworkViewCom = GetComponent<NetworkView>();
+//		NetworkViewCom = GetComponent<NetworkView>();
 		if (transform.parent != XkGameCtrl.MissionCleanup) {
 			transform.parent = XkGameCtrl.MissionCleanup;
 		}
@@ -123,26 +123,26 @@ public class BuJiBaoCtrl : MonoBehaviour {
 
 		if (Network.peerType != NetworkPeerType.Disconnected) {
 			if (Network.peerType == NetworkPeerType.Client) {
-				NetworkViewCom.RPC("BuJiBaoSendRemoveObj", RPCMode.OthersBuffered);
+//				NetworkViewCom.RPC("BuJiBaoSendRemoveObj", RPCMode.OthersBuffered);
 				return;
 			}
 		}
 		DestroyNetObj(gameObject);
 	}
 
-	[RPC] void BuJiBaoSendRemoveObj()
-	{
-		if (IsDeath) {
-			return;
-		}
-		IsDeath = true;
-
-		if (ExplodeObj != null) {
-			GameObject obj = (GameObject)Instantiate(ExplodeObj, transform.position, transform.rotation);
-			XkGameCtrl.CheckObjDestroyThisTimed(obj);
-		}
-		DestroyNetObj(gameObject);
-	}
+//	[RPC] void BuJiBaoSendRemoveObj()
+//	{
+//		if (IsDeath) {
+//			return;
+//		}
+//		IsDeath = true;
+//
+//		if (ExplodeObj != null) {
+//			GameObject obj = (GameObject)Instantiate(ExplodeObj, transform.position, transform.rotation);
+//			XkGameCtrl.CheckObjDestroyThisTimed(obj);
+//		}
+//		DestroyNetObj(gameObject);
+//	}
 
 	void DestroyNetObj(GameObject obj)
 	{

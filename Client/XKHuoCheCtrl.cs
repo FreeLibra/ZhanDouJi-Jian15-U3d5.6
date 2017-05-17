@@ -14,7 +14,7 @@ public class XKHuoCheCtrl : MonoBehaviour {
 	iTween ITweenScriptNpc;
 	bool IsStopAnimation;
 	XKSpawnNpcPoint SpawnPointScript;
-	NetworkView NetViewCom;
+//	NetworkView NetViewCom;
 	bool IsHandleRpc;
 	bool IsPlayTurnAnimation;
 	string AnimationCurName;
@@ -41,9 +41,9 @@ public class XKHuoCheCtrl : MonoBehaviour {
 			NpcTran = transform;
 		}
 
-		if (NetViewCom == null) {
-			NetViewCom = GetComponent<NetworkView>();
-		}
+//		if (NetViewCom == null) {
+//			NetViewCom = GetComponent<NetworkView>();
+//		}
 	}
 
 	void Update()
@@ -177,7 +177,7 @@ public class XKHuoCheCtrl : MonoBehaviour {
 	public void SetHuoCheInfo(XKSpawnNpcPoint script)
 	{
 		IsHandleRpc = true;
-		NetViewCom = GetComponent<NetworkView>();
+//		NetViewCom = GetComponent<NetworkView>();
 		SpawnPointScript = script;
 		transform.position = SpawnPointScript.transform.position;
 		transform.rotation = SpawnPointScript.transform.rotation;
@@ -262,14 +262,14 @@ public class XKHuoCheCtrl : MonoBehaviour {
 		if (Network.connections.Length <= 0 || NetworkServerNet.ServerSendState != 0) {
 			return;
 		}
-		NetViewCom.RPC("XKHuoCheSendSetNpcAimPlayerState", RPCMode.OthersBuffered, aimState, SpawnPointScript.FireDistance);
+//		NetViewCom.RPC("XKHuoCheSendSetNpcAimPlayerState", RPCMode.OthersBuffered, aimState, SpawnPointScript.FireDistance);
 	}
 	
-	[RPC] void XKHuoCheSendSetNpcAimPlayerState(int valAim, float valFireDis)
-	{
-		//Debug.Log("XKCannonSendSetNpcAimPlayerState.............");
-		SetCannonNpcInfo(valAim, valFireDis);
-	}
+//	[RPC] void XKHuoCheSendSetNpcAimPlayerState(int valAim, float valFireDis)
+//	{
+//		//Debug.Log("XKCannonSendSetNpcAimPlayerState.............");
+//		SetCannonNpcInfo(valAim, valFireDis);
+//	}
 	
 	void SetCannonNpcInfo(int valAim, float valFireDis)
 	{
@@ -293,14 +293,14 @@ public class XKHuoCheCtrl : MonoBehaviour {
 		if (!IsHandleRpc) {
 			return;
 		}
-		NetViewCom.RPC("XKHuoCheSendOtherTranformInfo", RPCMode.OthersBuffered, transform.position, transform.rotation);
+//		NetViewCom.RPC("XKHuoCheSendOtherTranformInfo", RPCMode.OthersBuffered, transform.position, transform.rotation);
 	}
 	
-	[RPC] void XKHuoCheSendOtherTranformInfo(Vector3 pos, Quaternion rot)
-	{
-		transform.position = pos;
-		transform.rotation = rot;
-	}
+//	[RPC] void XKHuoCheSendOtherTranformInfo(Vector3 pos, Quaternion rot)
+//	{
+//		transform.position = pos;
+//		transform.rotation = rot;
+//	}
 	
 	void SendNpcPlayAnimation(string ani)
 	{
@@ -315,13 +315,13 @@ public class XKHuoCheCtrl : MonoBehaviour {
 		if (!IsHandleRpc) {
 			return;
 		}
-		NetViewCom.RPC("XKHuoCheSendPlayAnimation", RPCMode.OthersBuffered, ani);
+//		NetViewCom.RPC("XKHuoCheSendPlayAnimation", RPCMode.OthersBuffered, ani);
 	}
 	
-	[RPC] void XKHuoCheSendPlayAnimation(string ani)
-	{
-		PlayNpcAnimation(ani);
-	}
+//	[RPC] void XKHuoCheSendPlayAnimation(string ani)
+//	{
+//		PlayNpcAnimation(ani);
+//	}
 
 	void SendHuoCheTranInfo(Vector3 pos, Quaternion rot)
 	{
@@ -338,14 +338,14 @@ public class XKHuoCheCtrl : MonoBehaviour {
 		if (!IsHandleRpc) {
 			return;
 		}
-		NetViewCom.RPC("XKHuoCheSendHuoCheTranInfo", RPCMode.OthersBuffered, pos, rot);
+//		NetViewCom.RPC("XKHuoCheSendHuoCheTranInfo", RPCMode.OthersBuffered, pos, rot);
 	}
 	
-	[RPC] void XKHuoCheSendHuoCheTranInfo(Vector3 pos, Quaternion rot)
-	{
-		SpawnPointHuoChePos = pos;
-		SpawnPointHuoCheRot = rot;
-	}
+//	[RPC] void XKHuoCheSendHuoCheTranInfo(Vector3 pos, Quaternion rot)
+//	{
+//		SpawnPointHuoChePos = pos;
+//		SpawnPointHuoCheRot = rot;
+//	}
 
 	public void OnRemoveHuoCheObj(float timeVal = 0f)
 	{

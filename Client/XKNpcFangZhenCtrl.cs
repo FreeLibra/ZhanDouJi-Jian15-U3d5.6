@@ -7,7 +7,7 @@ public class XKNpcFangZhenCtrl : MonoBehaviour {
 	public GameObject TestSpawnPoint;
 	GameObject NpcObj;
 	Transform NpcTran;
-	NetworkView NetViewCom;
+//	NetworkView NetViewCom;
 	Transform NpcPathTran;
 	float MvSpeed;
 	int MarkCount;
@@ -25,13 +25,13 @@ public class XKNpcFangZhenCtrl : MonoBehaviour {
 	void Awake()
 	{
 		//NpcId = GetInstanceID();
-		if (NetViewCom == null) {
-			NetViewCom = GetComponent<NetworkView>();
-		}
-
-		if (Network.peerType == NetworkPeerType.Disconnected) {
-			NetViewCom.enabled = false;
-		}
+//		if (NetViewCom == null) {
+//			NetViewCom = GetComponent<NetworkView>();
+//		}
+//
+//		if (Network.peerType == NetworkPeerType.Disconnected) {
+//			NetViewCom.enabled = false;
+//		}
 		transform.parent = XkGameCtrl.MissionCleanup;
 	}
 
@@ -232,7 +232,7 @@ public class XKNpcFangZhenCtrl : MonoBehaviour {
 
 	public void SetSpawnNpcInfo(XKSpawnNpcPoint spawnScript)
 	{
-		NetViewCom = GetComponent<NetworkView>();
+//		NetViewCom = GetComponent<NetworkView>();
 		SpawnPointScript = spawnScript;
 		SetAimState();
 		TestSpawnPoint = spawnScript.gameObject;
@@ -274,8 +274,8 @@ public class XKNpcFangZhenCtrl : MonoBehaviour {
 		if (Network.peerType != NetworkPeerType.Server) {
 			return;
 		}
-		NetViewCom.RPC("XKNpcFZSendFireAnimationIsAimFeiJiPlayer", RPCMode.OthersBuffered,
-		               isAim == true ? 1 : 0);
+//		NetViewCom.RPC("XKNpcFZSendFireAnimationIsAimFeiJiPlayer", RPCMode.OthersBuffered,
+//		               isAim == true ? 1 : 0);
 	}
 
 	void SetNpcIsAimFeiJiPlayer(bool isAim)
@@ -286,11 +286,11 @@ public class XKNpcFangZhenCtrl : MonoBehaviour {
 		}
 	}
 
-	[RPC] void XKNpcFZSendFireAnimationIsAimFeiJiPlayer(int val)
-	{
-		bool isAim = val == 1 ? true : false;
-		SetNpcIsAimFeiJiPlayer(isAim);
-	}
+//	[RPC] void XKNpcFZSendFireAnimationIsAimFeiJiPlayer(int val)
+//	{
+//		bool isAim = val == 1 ? true : false;
+//		SetNpcIsAimFeiJiPlayer(isAim);
+//	}
 
 	IEnumerator StartMoveNpcByItween(AnimatorNameNPC aniVal, float rootTime)
 	{

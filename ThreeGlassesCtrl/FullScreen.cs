@@ -30,7 +30,7 @@ public class FullScreen : MonoBehaviour
     const uint SWP_SHOWWINDOW = 0x0040;
     const int GWL_STYLE = -16;
 	const int WS_BORDER = 1;
-	private IntPtr windowHandle = IntPtr.Zero;
+	//private IntPtr windowHandle = IntPtr.Zero;
 
     void Awake()
     {

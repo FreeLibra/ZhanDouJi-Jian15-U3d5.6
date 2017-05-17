@@ -3,9 +3,9 @@ using System.Collections;
 
 public class XKSpawnBulletParticle : MonoBehaviour
 {
-	public ParticleEmitter[] capsuleEmitter;
+	public ParticleSystem[] capsuleEmitter;
 	bool IsFireTrigger;
-	bool IsFireState = true;
+//	bool IsFireState = true;
 	float TimeLastVal;
 	static XKSpawnBulletParticle _InstanceOne;
 	public static XKSpawnBulletParticle GetInstanceOne()
@@ -42,29 +42,28 @@ public class XKSpawnBulletParticle : MonoBehaviour
 
 	void SetFireParticleState(bool isFire)
 	{
-		if (IsFireState == isFire) {
-			return;
-		}
-		IsFireState = isFire;
-
-		if (isFire) {
-			if(capsuleEmitter != null) {
-				for(int i = 0; i < capsuleEmitter.Length; i++) {
-					if (capsuleEmitter[i] != null) {
-						capsuleEmitter[i].Emit();
-					}
-				}
-			}
-		}
-		else {
-			if(capsuleEmitter != null) {
-				for(int i = 0; i < capsuleEmitter.Length; i++) {
-					if (capsuleEmitter[i] != null) {
-						capsuleEmitter[i].emit = false;
-					}
-				}
-			}
-		}
-
+//		if (IsFireState == isFire) {
+//			return;
+//		}
+//		IsFireState = isFire;
+//
+//		if (isFire) {
+//			if(capsuleEmitter != null) {
+//				for(int i = 0; i < capsuleEmitter.Length; i++) {
+//					if (capsuleEmitter[i] != null) {
+//						capsuleEmitter[i].Emit();
+//					}
+//				}
+//			}
+//		}
+//		else {
+//			if(capsuleEmitter != null) {
+//				for(int i = 0; i < capsuleEmitter.Length; i++) {
+//					if (capsuleEmitter[i] != null) {
+//						capsuleEmitter[i].emit = false;
+//					}
+//				}
+//			}
+//		}
 	}
 }

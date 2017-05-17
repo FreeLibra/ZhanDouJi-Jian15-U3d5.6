@@ -72,12 +72,14 @@ public class ScreenLog : MonoBehaviour
 			isShow = !isShow;
 			if(isShow)
 			{
-				Screen.lockCursor = false;
+//				Screen.lockCursor = false;
+				Cursor.visible = false;
 				Log("show Screen Log...");
 			}
 			else
 			{
-				Screen.lockCursor = true;
+//				Screen.lockCursor = true;
+				Cursor.visible = true;
 				Log("hidden Screen Log...");
 			}
 		}

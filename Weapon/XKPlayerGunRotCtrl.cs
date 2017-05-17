@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class XKPlayerGunRotCtrl : MonoBehaviour
 {
 	public PlayerEnum PlayerSt = PlayerEnum.PlayerOne;
+	//坦克vr隐藏实体枪.
+	public GameObject HiddenGunObj;
 	public Transform PlayerGunTr;
 	public Transform PlayerMainCamTr;
 	float MaxPX = 0f;
@@ -36,7 +38,10 @@ public class XKPlayerGunRotCtrl : MonoBehaviour
 		}
 		MaxPX = Screen.width;
 		MaxPY = Screen.height;
-	}
+        if (HiddenGunObj != null) {
+            HiddenGunObj.SetActive(false);
+        }
+    }
 
 	// Update is called once per frame
 	void Update()

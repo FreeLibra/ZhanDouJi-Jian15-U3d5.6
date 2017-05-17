@@ -338,7 +338,7 @@ public class XkGameCtrl : MonoBehaviour {
 			return;
 		}
 
-		Vector3 posPlayerFJ = new Vector3(0f, -1700f, 0f);
+//		Vector3 posPlayerFJ = new Vector3(0f, -1700f, 0f);
 		Vector3 posPlayerTK = new Vector3(0f, -1500f, 0f);
 		switch (GameModeVal) {
 		case GameMode.DanJiFeiJi:
@@ -622,7 +622,8 @@ public class XkGameCtrl : MonoBehaviour {
 		if (!pcvr.bIsHardWare) {
 			if (IsCartoonShootTest) {
 				if (Input.GetKeyUp(KeyCode.N)) {
-					if (!XkGameCtrl.IsGameOnQuit && (SceneManager.GetActiveScene().buildIndex+1) < Application.levelCount) {
+					if (!XkGameCtrl.IsGameOnQuit
+					    && (SceneManager.GetActiveScene().buildIndex+1) < SceneManager.sceneCountInBuildSettings) {
 						System.GC.Collect();
 						SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex+1));
 					}

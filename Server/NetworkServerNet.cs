@@ -187,13 +187,13 @@ public class NetworkServerNet : MonoBehaviour {
 		yield return new WaitForSeconds(timeVal);
 		if (netObj != null) {
 			RemoveNpcObjList(netObj);
-			NetworkView netViewCom = netObj.GetComponent<NetworkView>();
-			if (netViewCom != null && Network.peerType != NetworkPeerType.Disconnected) {
-				Network.Destroy(netObj);
-			}
-			else {
-				Destroy(netObj);
-			}
+//			NetworkView netViewCom = netObj.GetComponent<NetworkView>();
+//			if (netViewCom != null && Network.peerType != NetworkPeerType.Disconnected) {
+//				Network.Destroy(netObj);
+//			}
+//			else {
+//				Destroy(netObj);
+//			}
 		}
 
 	}

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
 
 public class pcvr : MonoBehaviour {
 	public static bool bIsHardWare = false;
@@ -140,7 +141,7 @@ public class pcvr : MonoBehaviour {
 	// Use this for initialization
 	void Awake()
 	{
-		if (Application.loadedLevel == (int)GameLevel.Movie) {
+		if (SceneManager.GetActiveScene().buildIndex == (int)GameLevel.Movie) {
 			AudioManager.Instance.SetParentTran(transform);
 		}
 	}

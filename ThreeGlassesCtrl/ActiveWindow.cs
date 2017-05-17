@@ -23,7 +23,7 @@ public class ActiveWindow : MonoBehaviour
     private static extern bool EnumThreadWindows(uint dwThreadId, EnumWindowsProc lpEnumFunc, IntPtr lParam);
 
     private const string UnityWindowClassName = "UnityWndClass";
-    private IntPtr _windowHandle = IntPtr.Zero;
+//    private IntPtr _windowHandle = IntPtr.Zero;
 
     // Use this for initialization
     public IEnumerator Start ()
@@ -34,7 +34,7 @@ public class ActiveWindow : MonoBehaviour
             var classText = new StringBuilder(UnityWindowClassName.Length + 1);
             GetClassName(hWnd, classText, classText.Capacity);
             if (classText.ToString() != UnityWindowClassName) return true;
-            _windowHandle = hWnd;
+//            _windowHandle = hWnd;
             return false;
         }, IntPtr.Zero);
 

@@ -59,7 +59,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 	NpcFireAction FireAnimation;
 	Transform MarkNpcMove;
 	bool IsMoveToMarkPoint;
-	NetworkView NetViewCom;
+//	NetworkView NetViewCom;
 	int RecordAimPlayerState = -1;
 	bool IsHandleRpc;
 	void Awake()
@@ -79,10 +79,10 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 		}
 
 		NpcMoveType = NpcJiFen;
-		NetViewCom = GetComponent<NetworkView>();
-		if (Network.peerType == NetworkPeerType.Disconnected) {
-			NetViewCom.enabled = false;
-		}
+//		NetViewCom = GetComponent<NetworkView>();
+//		if (Network.peerType == NetworkPeerType.Disconnected) {
+//			NetViewCom.enabled = false;
+//		}
 		InitNpcInfo();
 		//XkGameCtrl.GetInstance().AddNpcTranToList(NpcTran);
 		MakeLandNpcMoveToLand();
@@ -283,9 +283,9 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 	int NpcAimPlayerState = -1;
 	void SetNpcAimPlayerState()
 	{
-		if (NetViewCom == null) {
-			NetViewCom = GetComponent<NetworkView>();
-		}
+//		if (NetViewCom == null) {
+//			NetViewCom = GetComponent<NetworkView>();
+//		}
 
 		if (SpawnPointScript.PointType == SpawnPointType.KongZhong) {
 			NpcAimPlayerState = 0;
@@ -313,16 +313,16 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 		if (!IsHandleRpc) {
 			return;
 		}
-		NetViewCom.RPC("XKNpcSendSetNpcAimPlayerState", RPCMode.OthersBuffered, NpcAimPlayerState);
+//		NetViewCom.RPC("XKNpcSendSetNpcAimPlayerState", RPCMode.OthersBuffered, NpcAimPlayerState);
 	}
 
-	[RPC] void XKNpcSendSetNpcAimPlayerState(int val)
-	{
-		if (val > 2 || val < 0) {
-			return;
-		}
-		NpcAimPlayerState = val;
-	}
+//	[RPC] void XKNpcSendSetNpcAimPlayerState(int val)
+//	{
+//		if (val > 2 || val < 0) {
+//			return;
+//		}
+//		NpcAimPlayerState = val;
+//	}
 
 	void SetNpcIsAimPlayer(int val)
 	{
@@ -342,19 +342,19 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 			return;
 		}
 		RecordAimPlayerState = val;
-		NetViewCom.RPC("XKNpcSendSetNpcIsAimPlayer", RPCMode.OthersBuffered, val);
+//		NetViewCom.RPC("XKNpcSendSetNpcIsAimPlayer", RPCMode.OthersBuffered, val);
 	}
 
-	[RPC] void XKNpcSendSetNpcIsAimPlayer(int val)
-	{
-		bool isAim = val == 1 ? true : false;
-		if (isAim == false && isAim != IsAimPlayer) {
-			if (RealNpcTran.localEulerAngles != Vector3.zero) {
-				RealNpcTran.localEulerAngles = Vector3.zero;
-			}
-		}
-		IsAimPlayer = isAim;
-	}
+//	[RPC] void XKNpcSendSetNpcIsAimPlayer(int val)
+//	{
+//		bool isAim = val == 1 ? true : false;
+//		if (isAim == false && isAim != IsAimPlayer) {
+//			if (RealNpcTran.localEulerAngles != Vector3.zero) {
+//				RealNpcTran.localEulerAngles = Vector3.zero;
+//			}
+//		}
+//		IsAimPlayer = isAim;
+//	}
 
 	void SendNpcTransformInfo()
 	{
@@ -378,27 +378,27 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 		if (IsHuoCheNpc) {
 			return;
 		}
-		NetViewCom.RPC("XKNpcSendOtherTranformInfo", RPCMode.OthersBuffered, transform.position, transform.rotation);
+//		NetViewCom.RPC("XKNpcSendOtherTranformInfo", RPCMode.OthersBuffered, transform.position, transform.rotation);
 
 		if (IsZaiTiNpc) {
-			NetViewCom.RPC("XKRealNpcSendOtherTranformInfo", RPCMode.OthersBuffered, RealNpcTran.rotation);
+//			NetViewCom.RPC("XKRealNpcSendOtherTranformInfo", RPCMode.OthersBuffered, RealNpcTran.rotation);
 		}
 	}
 
-	[RPC] void XKNpcSendOtherTranformInfo(Vector3 pos, Quaternion rot)
-	{
-		if (IsHuoCheNpc) {
-			return;
-		}
-		transform.position = pos;
-		transform.rotation = rot;
-		MakeLandNpcMoveToLand();
-	}
+//	[RPC] void XKNpcSendOtherTranformInfo(Vector3 pos, Quaternion rot)
+//	{
+//		if (IsHuoCheNpc) {
+//			return;
+//		}
+//		transform.position = pos;
+//		transform.rotation = rot;
+//		MakeLandNpcMoveToLand();
+//	}
 	
-	[RPC] void XKRealNpcSendOtherTranformInfo(Quaternion rot)
-	{
-		RealNpcTran.rotation = rot;
-	}
+//	[RPC] void XKRealNpcSendOtherTranformInfo(Quaternion rot)
+//	{
+//		RealNpcTran.rotation = rot;
+//	}
 
 	public FirePoint GetFirePointScript()
 	{
@@ -629,8 +629,8 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 		if (Network.peerType != NetworkPeerType.Server) {
 			return;
 		}
-		NetViewCom.RPC("XKNpcSendFireAnimationIsAimFeiJiPlayer", RPCMode.OthersBuffered,
-		               isAim == true ? 1 : 0);
+//		NetViewCom.RPC("XKNpcSendFireAnimationIsAimFeiJiPlayer", RPCMode.OthersBuffered,
+//		               isAim == true ? 1 : 0);
 	}
 	
 	void SetNpcIsAimFeiJiPlayer(bool isAim)
@@ -646,31 +646,31 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 		}
 	}
 	
-	[RPC] void XKNpcSendFireAnimationIsAimFeiJiPlayer(int val)
-	{
-		if (IsDeathNPC) {
-			IsDeathNPC = false;
-			XKNpcHealthCtrl healthScript = AnimatorCom.GetComponent<XKNpcHealthCtrl>();
-			if (healthScript != null) {
-				healthScript.SetNpcMoveScript(this);
-			}
-		}
-
-		if (RealNpcTran != null) {
-			RealNpcTran.gameObject.SetActive(true);
-		}
-
-		if (AnimatorCom == null) {
-			AnimatorCom = RealNpcTran.GetComponent<Animator>();
-		}
-
-		if (AnimatorCom != null) {
-			AnimatorCom.enabled = true;
-		}
-
-		bool isAim = val == 1 ? true : false;
-		SetNpcIsAimFeiJiPlayer(isAim);
-	}
+//	[RPC] void XKNpcSendFireAnimationIsAimFeiJiPlayer(int val)
+//	{
+//		if (IsDeathNPC) {
+//			IsDeathNPC = false;
+//			XKNpcHealthCtrl healthScript = AnimatorCom.GetComponent<XKNpcHealthCtrl>();
+//			if (healthScript != null) {
+//				healthScript.SetNpcMoveScript(this);
+//			}
+//		}
+//
+//		if (RealNpcTran != null) {
+//			RealNpcTran.gameObject.SetActive(true);
+//		}
+//
+//		if (AnimatorCom == null) {
+//			AnimatorCom = RealNpcTran.GetComponent<Animator>();
+//		}
+//
+//		if (AnimatorCom != null) {
+//			AnimatorCom.enabled = true;
+//		}
+//
+//		bool isAim = val == 1 ? true : false;
+//		SetNpcIsAimFeiJiPlayer(isAim);
+//	}
 
 	XKCannonCtrl[] CannonScript;
 	public void SetSpawnNpcInfo(XKSpawnNpcPoint spawnScript)
@@ -730,15 +730,15 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 		if (Network.connections.Length <= 0 || NetworkServerNet.ServerSendState != 0) {
 			return;
 		}
-		int indexVal = spawnScript.GetIndexFeiJiPoint();
-		NetViewCom.RPC("XKNpcSendFeiJiNpcPointIndex", RPCMode.OthersBuffered, indexVal);
+//		int indexVal = spawnScript.GetIndexFeiJiPoint();
+//		NetViewCom.RPC("XKNpcSendFeiJiNpcPointIndex", RPCMode.OthersBuffered, indexVal);
 	}
 
-	[RPC] void XKNpcSendFeiJiNpcPointIndex(int indexVal)
-	{
-		//Debug.Log("XKNpcSendFeiJiNpcPointIndex -> indexVal "+indexVal);
-		XKSpawnNpcPoint.HandleFeiJiNpcSpawnInfo(this, indexVal);
-	}
+//	[RPC] void XKNpcSendFeiJiNpcPointIndex(int indexVal)
+//	{
+//		//Debug.Log("XKNpcSendFeiJiNpcPointIndex -> indexVal "+indexVal);
+//		XKSpawnNpcPoint.HandleFeiJiNpcSpawnInfo(this, indexVal);
+//	}
 	
 	void SetCannonAimPlayerState()
 	{
@@ -764,17 +764,17 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 			return;
 		}
 		
-		if (NetViewCom == null) {
-			NetViewCom = GetComponent<NetworkView>();
-		}
-		NetViewCom.RPC("XKCannonSendSetNpcAimPlayerState", RPCMode.OthersBuffered, aimState, SpawnPointScript.FireDistance);
+//		if (NetViewCom == null) {
+//			NetViewCom = GetComponent<NetworkView>();
+//		}
+//		NetViewCom.RPC("XKCannonSendSetNpcAimPlayerState", RPCMode.OthersBuffered, aimState, SpawnPointScript.FireDistance);
 	}
 	
-	[RPC] void XKCannonSendSetNpcAimPlayerState(int valAim, float valFireDis)
-	{
-		//Debug.Log("XKCannonSendSetNpcAimPlayerState.............");
-		SetCannonNpcInfo(valAim, valFireDis);
-	}
+//	[RPC] void XKCannonSendSetNpcAimPlayerState(int valAim, float valFireDis)
+//	{
+//		//Debug.Log("XKCannonSendSetNpcAimPlayerState.............");
+//		SetCannonNpcInfo(valAim, valFireDis);
+//	}
 	
 	void SetCannonNpcInfo(int valAim, float valFireDis)
 	{
@@ -1242,14 +1242,14 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 		    || NetworkServerNet.ServerSendState != 0) {
 			return;
 		}
-		NetViewCom.RPC("XKNpcSetClientNpcIsDoFireAnimation", RPCMode.OthersBuffered,
-		               isDoFire == true ? 1 : 0);
+//		NetViewCom.RPC("XKNpcSetClientNpcIsDoFireAnimation", RPCMode.OthersBuffered,
+//		               isDoFire == true ? 1 : 0);
 	}
 
-	[RPC] void XKNpcSetClientNpcIsDoFireAnimation(int val)
-	{
-		IsDoFireAnimation = (val == 1 ? true : false);
-	}
+//	[RPC] void XKNpcSetClientNpcIsDoFireAnimation(int val)
+//	{
+//		IsDoFireAnimation = (val == 1 ? true : false);
+//	}
 
 	public bool GetIsWuDi()
 	{
@@ -1322,21 +1322,21 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 	{
 		aniScript.PlayNpcAnimatoin(aniName);
 
-		if (Network.peerType == NetworkPeerType.Server && NetViewCom != null) {
-			if (Network.connections.Length <= 0 || NetworkServerNet.ServerSendState != 0 || !IsHandleRpc) {
-				return;
-			}
-			NetViewCom.RPC("XKNpcSendPlayAnimation", RPCMode.OthersBuffered, aniName);
-		}
+//		if (Network.peerType == NetworkPeerType.Server && NetViewCom != null) {
+//			if (Network.connections.Length <= 0 || NetworkServerNet.ServerSendState != 0 || !IsHandleRpc) {
+//				return;
+//			}
+////			NetViewCom.RPC("XKNpcSendPlayAnimation", RPCMode.OthersBuffered, aniName);
+//		}
 	}
 
-	[RPC] void XKNpcSendPlayAnimation(string aniName)
-	{
-		if (NpcAniScript == null) {
-			return;
-		}
-		NpcAniScript.PlayNpcAnimatoin(aniName);
-	}
+//	[RPC] void XKNpcSendPlayAnimation(string aniName)
+//	{
+//		if (NpcAniScript == null) {
+//			return;
+//		}
+//		NpcAniScript.PlayNpcAnimatoin(aniName);
+//	}
 
 	public bool GetIsDeathNPC()
 	{
@@ -1362,13 +1362,13 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 		if (IsHandleRpc) {
 			return;
 		}
-		NetViewCom.RPC("XKNpcSendServerRemoveNpc", RPCMode.OthersBuffered);
+//		NetViewCom.RPC("XKNpcSendServerRemoveNpc", RPCMode.OthersBuffered);
 	}
 
-	[RPC] void XKNpcSendServerRemoveNpc()
-	{
-		TriggerRemovePointNpc(1);
-	}
+//	[RPC] void XKNpcSendServerRemoveNpc()
+//	{
+//		TriggerRemovePointNpc(1);
+//	}
 
 	void CallServerRemoveCannon(int cannonIndex)
 	{
@@ -1379,25 +1379,25 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 		if (IsHandleRpc) {
 			return;
 		}
-		NetViewCom.RPC("XKNpcSendServerRemoveCannon", RPCMode.OthersBuffered, cannonIndex);
+//		NetViewCom.RPC("XKNpcSendServerRemoveCannon", RPCMode.OthersBuffered, cannonIndex);
 	}
 	
-	[RPC] void XKNpcSendServerRemoveCannon(int cannonIndex)
-	{
-		if (CannonScript == null) {
-			return;
-		}
-
-		int max = CannonScript.Length;
-		if (max > 1) {
-			for (int i = 0; i < max; i++) {
-				if (CannonScript[i] != null) {
-					CannonScript[i].OnRemoveCannon(PlayerEnum.Null, 1);
-					break;
-				}
-			}
-		}
-	}
+//	[RPC] void XKNpcSendServerRemoveCannon(int cannonIndex)
+//	{
+//		if (CannonScript == null) {
+//			return;
+//		}
+//
+//		int max = CannonScript.Length;
+//		if (max > 1) {
+//			for (int i = 0; i < max; i++) {
+//				if (CannonScript[i] != null) {
+//					CannonScript[i].OnRemoveCannon(PlayerEnum.Null, 1);
+//					break;
+//				}
+//			}
+//		}
+//	}
 
 	public void TriggerRemovePointNpc(int key, XKCannonCtrl cannonScriptVal = null)
 	{
@@ -1632,13 +1632,13 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 		if (Network.connections.Length <= 0 || NetworkServerNet.ServerSendState != 0) {
 			return;
 		}
-		NetViewCom.RPC("XKNpcSendSetHuoCheNpcInfo", RPCMode.OthersBuffered, indexPoint);
+//		NetViewCom.RPC("XKNpcSendSetHuoCheNpcInfo", RPCMode.OthersBuffered, indexPoint);
 	}
 	
-	[RPC] void XKNpcSendSetHuoCheNpcInfo(int indexPoint)
-	{
-		StartCoroutine(DelaySetHuoCheNpcInfo(indexPoint));
-	}
+//	[RPC] void XKNpcSendSetHuoCheNpcInfo(int indexPoint)
+//	{
+//		StartCoroutine(DelaySetHuoCheNpcInfo(indexPoint));
+//	}
 	
 	IEnumerator DelaySetHuoCheNpcInfo(int indexPoint)
 	{
@@ -1680,13 +1680,13 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 		if (Network.connections.Length <= 0 || NetworkServerNet.ServerSendState != 0) {
 			return;
 		}
-		NetViewCom.RPC("XKNpcSendSetFeiJiNpcInfo", RPCMode.OthersBuffered, indexPoint);
+//		NetViewCom.RPC("XKNpcSendSetFeiJiNpcInfo", RPCMode.OthersBuffered, indexPoint);
 	}
 	
-	[RPC] void XKNpcSendSetFeiJiNpcInfo(int indexPoint)
-	{
-		StartCoroutine(DelaySetFeiJiNpcInfo(indexPoint));
-	}
+//	[RPC] void XKNpcSendSetFeiJiNpcInfo(int indexPoint)
+//	{
+//		StartCoroutine(DelaySetFeiJiNpcInfo(indexPoint));
+//	}
 	
 	IEnumerator DelaySetFeiJiNpcInfo(int indexPoint)
 	{
@@ -1838,40 +1838,40 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 		NpcTran.position = new Vector3(-18000f, -18000f, 0f);
 
 		if (Network.peerType == NetworkPeerType.Server) {
-			NetViewCom.RPC("NpcSendResetNpcTransformInfo", RPCMode.OthersBuffered);
+//			NetViewCom.RPC("NpcSendResetNpcTransformInfo", RPCMode.OthersBuffered);
 		}
 	}
 
-	[RPC] void NpcSendResetNpcTransformInfo()
-	{
-		IsDeathNPC = true;
-		AnimatorCom.enabled = false;
-		XkNpcZaiTiCtrl zaiTiScript = GetComponentInChildren<XkNpcZaiTiCtrl>();
-		if (zaiTiScript != null && zaiTiScript.ZaiTiNpcBuWaWa != null) {
-			zaiTiScript.ResetNpcZaiTiSomeInfo();
-		}
-
-		RealNpcTran.gameObject.SetActive(false);
-		RealNpcTran.localPosition = Vector3.zero;
-		RealNpcTran.localEulerAngles = Vector3.zero;
-
-		if (BuWaWaRigidbody != null) {
-			Transform buWaWaTran = BuWaWaRigidbody.transform;
-			buWaWaTran.localPosition = Vector3.zero;
-			buWaWaTran.localEulerAngles = Vector3.zero;
-		}
-		
-		Rigidbody rigCom = NpcObj.GetComponent<Rigidbody>();
-		if (rigCom != null && !rigCom.isKinematic) {
-			Destroy(rigCom);
-		}
-		
-		rigCom = RealNpcTran.GetComponent<Rigidbody>();
-		if (rigCom != null && !rigCom.isKinematic) {
-			Destroy(rigCom);
-		}
-		NpcTran.position = new Vector3(-18000f, -18000f, 0f);
-	}
+//	[RPC] void NpcSendResetNpcTransformInfo()
+//	{
+//		IsDeathNPC = true;
+//		AnimatorCom.enabled = false;
+//		XkNpcZaiTiCtrl zaiTiScript = GetComponentInChildren<XkNpcZaiTiCtrl>();
+//		if (zaiTiScript != null && zaiTiScript.ZaiTiNpcBuWaWa != null) {
+//			zaiTiScript.ResetNpcZaiTiSomeInfo();
+//		}
+//
+//		RealNpcTran.gameObject.SetActive(false);
+//		RealNpcTran.localPosition = Vector3.zero;
+//		RealNpcTran.localEulerAngles = Vector3.zero;
+//
+//		if (BuWaWaRigidbody != null) {
+//			Transform buWaWaTran = BuWaWaRigidbody.transform;
+//			buWaWaTran.localPosition = Vector3.zero;
+//			buWaWaTran.localEulerAngles = Vector3.zero;
+//		}
+//		
+//		Rigidbody rigCom = NpcObj.GetComponent<Rigidbody>();
+//		if (rigCom != null && !rigCom.isKinematic) {
+//			Destroy(rigCom);
+//		}
+//		
+//		rigCom = RealNpcTran.GetComponent<Rigidbody>();
+//		if (rigCom != null && !rigCom.isKinematic) {
+//			Destroy(rigCom);
+//		}
+//		NpcTran.position = new Vector3(-18000f, -18000f, 0f);
+//	}
 
 	void HandleNpcDeathInfo()
 	{

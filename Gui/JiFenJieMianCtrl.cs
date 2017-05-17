@@ -144,7 +144,7 @@ public class JiFenJieMianCtrl : MonoBehaviour {
 		//GameOverCtrl.IsShowGameOver = true; //test
 		if (SceneManager.GetActiveScene().buildIndex < (int)GameLevel.Scene_4
 		//if (SceneManager.GetActiveScene().buildIndex < XkGameCtrl.TestGameEndLv //test
-		    && SceneManager.GetActiveScene().buildIndex < (Application.levelCount - 1)
+		    && SceneManager.GetActiveScene().buildIndex < (SceneManager.sceneCountInBuildSettings - 1)
 		    && !GameOverCtrl.IsShowGameOver) {
 			MakeOtherPortStopJiFenTime();
 			int loadLevel = SceneManager.GetActiveScene().buildIndex + 1;
