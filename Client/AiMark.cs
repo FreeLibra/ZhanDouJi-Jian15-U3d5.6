@@ -50,6 +50,11 @@ public class AiMark : MonoBehaviour
 //			}
 //		}
 
+		MeshRenderer meshCom = GetComponent<MeshRenderer>();
+		if (meshCom != null) {
+			meshCom.enabled = false;
+		}
+
 		if (PlayerAni == ZhiShengJiAction.Null && TimePlayerAni > 0f && MvSpeed > 1f) {
 			Debug.Log("PlayerAni is null, but MvSpeed is greater than 1f");
 			isOutputError = true;
