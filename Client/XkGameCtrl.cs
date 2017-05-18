@@ -28,14 +28,14 @@ public enum GameJiTaiType
 }
 
 public class XkGameCtrl : MonoBehaviour {
-	public GameObject GameWaterObj;
+//	GameObject GameWaterObj;
 	/**
 	 * CameraVRObj[0] -> cameraPlayer1.
 	 * CameraVRObj[1] -> cameraPlayer2.
 	 */
-	public GameObject[] CameraVRObj;
+//	public GameObject[] CameraVRObj;
 	/**
-	 * YouLiangDianMin -> 椋炴満涓昏?鍗曚汉娌归噺鐐疙
+	 * YouLiangDianMin -> 油量点即为玩家的血值.
 	 */
 	[Range(1, 1000)] public int YouLiangDianMin = 50;
 	/**
@@ -45,29 +45,29 @@ public class XkGameCtrl : MonoBehaviour {
 	/**
 	 * YouLiangDianMinLJ -> 椋炴満涓昏?鑱旀満鍗曚汉娌归噺鐐疙
 	 */
-	[Range(1, 1000)] public int YouLiangDianMinLJ = 50;
+	[Range(1, 1000)] int YouLiangDianMinLJ = 50;
 	/**
 	 * YouLiangDianMinLJSR -> 椋炴満涓昏?鑱旀満鍙屼汉娌归噺鐐疙
 	 */
-	[Range(1, 1000)] public int YouLiangDianMinLJSR = 50;
+	[Range(1, 1000)] int YouLiangDianMinLJSR = 50;
 	/**
 	 * YouLiangDianMin -> 鍧﹀厠涓昏?鍗曚汉娌归噺鐐疙
 	 */
-	[Range(1, 1000)] public int TKYouLiangDianMin = 50;
+	[Range(1, 1000)] int TKYouLiangDianMin = 50;
 	/**
 	 * YouLiangDianMinSR -> 鍧﹀厠涓昏?鍙屼汉娌归噺鐐疙
 	 */
-	[Range(1, 1000)] public int SRTKYouLiangDianMin = 50;
+	[Range(1, 1000)] int SRTKYouLiangDianMin = 50;
 	/**
 	 * YouLiangDianMinLJ -> 鍧﹀厠涓昏?鑱旀満鍗曚汉娌归噺鐐疙
 	 */
-	[Range(1, 1000)] public int LJTKYouLiangDianMin = 50;
+	[Range(1, 1000)] int LJTKYouLiangDianMin = 50;
 	/**
 	 * YouLiangDianMinLJSR -> 鍧﹀厠涓昏?鑱旀満鍙屼汉娌归噺鐐疙
 	 */
-	[Range(1, 1000)] public int LJSRTKYouLiangDianMin = 50;
+	[Range(1, 1000)] int LJSRTKYouLiangDianMin = 50;
 	int YouLiangDianVal;
-	[Range(1, 99)] public int DaoDanNum = 50;
+	[Range(1, 99999)] public int DaoDanNum = 50;
 	public GameObject FeiJiPlayer;
 	public AiMark FeiJiPlayerMark;
 	Transform FeiJiPlayerTran;
@@ -80,9 +80,9 @@ public class XkGameCtrl : MonoBehaviour {
 //	AiPathCtrl TanKePlayerPath;
 	public GameObject CartoonCamPlayer;
 	public AiMark CartoonCamPlayerMark;
-	public GameObject ServerCamera; //鏈嶅姟鍣ㄩ?鏈烘憚鍍忔満.
+//	GameObject ServerCamera; //鏈嶅姟鍣ㄩ?鏈烘憚鍍忔満.
 	public static GameObject ServerCameraObj;
-	public GameObject ServerCameraTK; //鏈嶅姟鍣ㄥ潶鍏嬫憚鍍忔満.
+//	GameObject ServerCameraTK; //鏈嶅姟鍣ㄥ潶鍏嬫憚鍍忔満.
 	public static GameObject ServerCameraObjTK;
 	Transform CartoonCamPlayerTran;
 	int CartoonCamMarkIndex = 1;
@@ -184,7 +184,7 @@ public class XkGameCtrl : MonoBehaviour {
 		XKTriggerKaQiuShaFire.IsFireKaQiuSha = false;
 		XKTriggerOpenPlayerUI.IsActiveOpenPlayerUI = false;
 		XKGlobalData.GetInstance().StopModeBeiJingAudio();
-		SetActiveGameWaterObj(false);
+//		SetActiveGameWaterObj(false);
 		switch (XKGlobalData.GameDiff) {
 		case "0":
 			GameDiffVal = 0.8f;
@@ -221,11 +221,11 @@ public class XkGameCtrl : MonoBehaviour {
 			IsOpenVR = GameMovieCtrl.IsOpenVR;
 		}
 
-		for (int i = 0; i < CameraVRObj.Length; i++) {
-			if (CameraVRObj[i] != null) {
-				CameraVRObj[i].SetActive(IsOpenVR);
-			}
-		}
+//		for (int i = 0; i < CameraVRObj.Length; i++) {
+//			if (CameraVRObj[i] != null) {
+//				CameraVRObj[i].SetActive(IsOpenVR);
+//			}
+//		}
 
 		PlayerAmmoCtrl.PlayerAmmoHitLayer = PlayerAmmoHitLayer;
 		NpcAmmoList = new List<GameObject>();
@@ -339,7 +339,7 @@ public class XkGameCtrl : MonoBehaviour {
 		}
 
 //		Vector3 posPlayerFJ = new Vector3(0f, -1700f, 0f);
-		Vector3 posPlayerTK = new Vector3(0f, -1500f, 0f);
+//		Vector3 posPlayerTK = new Vector3(0f, -1500f, 0f);
 		switch (GameModeVal) {
 		case GameMode.DanJiFeiJi:
 			GameJiTaiSt = GameJiTaiType.FeiJiJiTai; //test
@@ -428,15 +428,15 @@ public class XkGameCtrl : MonoBehaviour {
 		Invoke("DelayResetIsLoadingLevel", 2f);
 		Invoke("TestInitCameraRender", 0.5f);
 
-		if (Network.peerType == NetworkPeerType.Server || IsServerCameraTest) {
-			ServerCameraObj = (GameObject)Instantiate(ServerCamera);
-			ServerCameraObj.SetActive(false);
-			ServerCameraObj.transform.parent = MissionCleanup;
-
-			ServerCameraObjTK = (GameObject)Instantiate(ServerCameraTK);
-			ServerCameraObjTK.SetActive(false);
-			ServerCameraObjTK.transform.parent = MissionCleanup;
-		}
+//		if (Network.peerType == NetworkPeerType.Server || IsServerCameraTest) {
+//			ServerCameraObj = (GameObject)Instantiate(ServerCamera);
+//			ServerCameraObj.SetActive(false);
+//			ServerCameraObj.transform.parent = MissionCleanup;
+//
+//			ServerCameraObjTK = (GameObject)Instantiate(ServerCameraTK);
+//			ServerCameraObjTK.SetActive(false);
+//			ServerCameraObjTK.transform.parent = MissionCleanup;
+//		}
 
 		if (!GameMovieCtrl.IsActivePlayer) {
 			switch (ActivePlayerTest) {
@@ -1702,21 +1702,21 @@ public class XkGameCtrl : MonoBehaviour {
 		return MissionCleanup.gameObject.activeSelf;
 	}
 	
-	public static void SetActiveGameWaterObj(bool isActive)
-	{
-		if (_Instance == null) {
-			return;
-		}
-		
-		if (_Instance.GameWaterObj == null) {
-			return;
-		}
-		
-		if (isActive == _Instance.GameWaterObj.activeSelf) {
-			return;
-		}
-		_Instance.GameWaterObj.SetActive(isActive);
-	}
+//	public static void SetActiveGameWaterObj(bool isActive)
+//	{
+//		if (_Instance == null) {
+//			return;
+//		}
+//		
+//		if (_Instance.GameWaterObj == null) {
+//			return;
+//		}
+//		
+//		if (isActive == _Instance.GameWaterObj.activeSelf) {
+//			return;
+//		}
+//		_Instance.GameWaterObj.SetActive(isActive);
+//	}
 	
 	public static void ActiveServerCameraTran()
 	{

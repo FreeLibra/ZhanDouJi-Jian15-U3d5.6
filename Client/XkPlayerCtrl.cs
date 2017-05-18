@@ -846,7 +846,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 		case PlayerTypeEnum.CartoonCamera:
 			MarkCount = XkGameCtrl.GetInstance().GetCartoonCamMarkIndex() - 1;
 			MakePlayerFlyToPathMark();
-			XkGameCtrl.SetActiveGameWaterObj(true);
+//			XkGameCtrl.SetActiveGameWaterObj(true);
 			break;
 		}
 	}

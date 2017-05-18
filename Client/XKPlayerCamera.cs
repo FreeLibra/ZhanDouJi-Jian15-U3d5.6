@@ -38,7 +38,7 @@ public class XKPlayerCamera : MonoBehaviour {
 		return _InstanceCartoon;
 	}
 
-	static Transform CameraVRTr;
+//	static Transform CameraVRTr;
 	void Awake()
 	{
 //		CameraVRTr = XkGameCtrl.GetInstance().CameraVRObj[0].transform;
@@ -237,17 +237,17 @@ public class XKPlayerCamera : MonoBehaviour {
 				PlayerMainCameraTmp[0].enabled = true;
 				PlayerMainCameraTmp[1].enabled = false;
 			}
-			else {
-				PlayerMainCameraTmp[0].enabled = false;
-				PlayerMainCameraTmp[1].enabled = false;
-				
-				CameraVRObj[0].SetActive(true);
-				CameraVRTr.parent = CameraVRObj[0].transform;
-				CameraVRTr.localPosition = Vector3.zero;
-				CameraVRTr.localEulerAngles = Vector3.zero;
-				CameraVRTr.localScale = Vector3.one;
-				CameraVRObj[1].SetActive(false);
-			}
+//			else {
+//				PlayerMainCameraTmp[0].enabled = false;
+//				PlayerMainCameraTmp[1].enabled = false;
+//				
+//				CameraVRObj[0].SetActive(true);
+//				CameraVRTr.parent = CameraVRObj[0].transform;
+//				CameraVRTr.localPosition = Vector3.zero;
+//				CameraVRTr.localEulerAngles = Vector3.zero;
+//				CameraVRTr.localScale = Vector3.one;
+//				CameraVRObj[1].SetActive(false);
+//			}
 			
 			if (XKPlayerGunLaser.GetInstanceOne() != null) {
 				XKPlayerGunLaser.GetInstanceOne().SetActivePlayerLaser(true);
@@ -262,16 +262,16 @@ public class XKPlayerCamera : MonoBehaviour {
 				PlayerMainCameraTmp[0].enabled = false;
 				PlayerMainCameraTmp[1].enabled = true;
 			}
-			else {
-				PlayerMainCameraTmp[0].enabled = false;
-				PlayerMainCameraTmp[1].enabled = false;
-
-				CameraVRObj[1].SetActive(true);
-				CameraVRTr.parent = CameraVRObj[1].transform;
-				CameraVRTr.localPosition = Vector3.zero;
-				CameraVRTr.localEulerAngles = Vector3.zero;
-				CameraVRTr.localScale = Vector3.one;
-				CameraVRObj[0].SetActive(false);}
+//			else {
+//				PlayerMainCameraTmp[0].enabled = false;
+//				PlayerMainCameraTmp[1].enabled = false;
+//
+//				CameraVRObj[1].SetActive(true);
+//				CameraVRTr.parent = CameraVRObj[1].transform;
+//				CameraVRTr.localPosition = Vector3.zero;
+//				CameraVRTr.localEulerAngles = Vector3.zero;
+//				CameraVRTr.localScale = Vector3.one;
+//				CameraVRObj[0].SetActive(false);}
 			
 			if (XKPlayerGunLaser.GetInstanceOne() != null) {
 				XKPlayerGunLaser.GetInstanceOne().SetActivePlayerLaser(false);
