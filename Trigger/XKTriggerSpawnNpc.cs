@@ -8,6 +8,11 @@ public class XKTriggerSpawnNpc : MonoBehaviour {
 	static bool IsDonnotSpawnNpcTest = false;
 	void Start()
 	{
+		MeshRenderer meshCom = GetComponent<MeshRenderer>();
+		if (meshCom != null) {
+			meshCom.enabled = false;
+		}
+
 		for (int i = 0; i < SpawnPointArray.Length; i++) {
 			if (SpawnPointArray[i] == null) {
 				Debug.LogWarning("SpawnPointArray was wrong! index "+(i+1));
@@ -17,7 +22,7 @@ public class XKTriggerSpawnNpc : MonoBehaviour {
 			}
 			SpawnPointArray[i].SetIsSpawnTrigger();
 		}
-		Invoke("DelayChangeBoxColliderSize", 0.2f);
+		//Invoke("DelayChangeBoxColliderSize", 0.2f);
 	}
 
 	void DelayChangeBoxColliderSize()
@@ -45,7 +50,7 @@ public class XKTriggerSpawnNpc : MonoBehaviour {
 			return;
 		}
 
-		XkPlayerCtrl ScriptPlayer = other.GetComponent<XkPlayerCtrl>();
+		XkPlayerCtrl ScriptPlayer = XkGameCtrl.GetPlayerScript(other.gameObject);
 		if (ScriptPlayer == null) {
 			return;
 		}
@@ -58,7 +63,7 @@ public class XKTriggerSpawnNpc : MonoBehaviour {
 //			return;
 //		}
 
-		//Debug.Log("XKTriggerSpawnNpc::OnTriggerEnter -> hit "+other.name);
+		Debug.Log("XKTriggerSpawnNpc::OnTriggerEnter -> hit "+other.name);
 		for (int i = 0; i < SpawnPointArray.Length; i++) {
 			SpawnPointArray[i].SpawnPointAllNpc();
 		}
@@ -74,14 +79,16 @@ public class XKTriggerSpawnNpc : MonoBehaviour {
 			return;
 		}
 
-		for (int i = 0; i < SpawnPointArray.Length; i++) {
-			if (SpawnPointArray[i] == null) {
-				Debug.LogWarning("SpawnPointArray was wrong! index "+(i+1));
-				GameObject obj = null;
-				obj.name = "null";
-				break;
+		if (SpawnPointArray != null || SpawnPointArray.Length > 1) {
+			for (int i = 0; i < SpawnPointArray.Length; i++) {
+				if (SpawnPointArray[i] == null) {
+					Debug.LogWarning("SpawnPointArray was wrong! index "+(i+1));
+					GameObject obj = null;
+					obj.name = "null";
+					break;
+				}
+				SpawnPointArray[i].AddTestTriggerSpawnNpc(this);
 			}
-			SpawnPointArray[i].AddTestTriggerSpawnNpc(this);
 		}
 
 		if (TestPlayerPath != null) {
