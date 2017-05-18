@@ -182,7 +182,7 @@ public class XKHuoCheCtrl : MonoBehaviour {
 		transform.position = SpawnPointScript.transform.position;
 		transform.rotation = SpawnPointScript.transform.rotation;
 		TestSpawnPoint = SpawnPointScript.gameObject;
-		SendHuoCheTranInfo(SpawnPointScript.HuoCheNpcTran.position, SpawnPointScript.HuoCheNpcTran.rotation);
+//		SendHuoCheTranInfo(SpawnPointScript.HuoCheNpcTran.position, SpawnPointScript.HuoCheNpcTran.rotation);
 		
 		XKNpcMoveCtrl[] npcMoveScript = GetComponentsInChildren<XKNpcMoveCtrl>();
 		int max = npcMoveScript.Length;

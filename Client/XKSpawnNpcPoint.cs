@@ -6,7 +6,7 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 	public SpawnPointType PointType = SpawnPointType.KongZhong;
 	public PlayerEnum PointPlayerSt = PlayerEnum.PlayerOne;
 	public bool IsAimFeiJiPlayer;
-	public Transform HuoCheNpcTran;
+//	public Transform HuoCheNpcTran;
 	public GameObject NpcObj;
 	public Transform NpcPath;
 	public FirePointCtrl[] FirePointGroup;
@@ -51,9 +51,9 @@ public class XKSpawnNpcPoint : MonoBehaviour {
             PointType = SpawnPointType.KongZhong;
         }
 
-		if (HuoCheNpcTran != null) {
-			HuoCheNpcTran.gameObject.SetActive(false);
-		}
+//		if (HuoCheNpcTran != null) {
+//			HuoCheNpcTran.gameObject.SetActive(false);
+//		}
 
 		if (NpcObj == null) {
 			if (!XkGameCtrl.GetInstance().IsCartoonShootTest) {
