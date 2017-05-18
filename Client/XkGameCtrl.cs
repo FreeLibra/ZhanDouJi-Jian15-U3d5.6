@@ -73,11 +73,11 @@ public class XkGameCtrl : MonoBehaviour {
 	Transform FeiJiPlayerTran;
 	int FeiJiMarkIndex = 1;
 	AiPathCtrl FeiJiPlayerPath;
-	public GameObject TanKePlayer;
-	public AiMark TanKePlayerMark;
-	Transform TanKePlayerTran;
-	int TanKeMarkIndex = 1;
-	AiPathCtrl TanKePlayerPath;
+//	public GameObject TanKePlayer;
+//	public AiMark TanKePlayerMark;
+//	Transform TanKePlayerTran;
+//	int TanKeMarkIndex = 1;
+//	AiPathCtrl TanKePlayerPath;
 	public GameObject CartoonCamPlayer;
 	public AiMark CartoonCamPlayerMark;
 	public GameObject ServerCamera; //鏈嶅姟鍣ㄩ?鏈烘憚鍍忔満.
@@ -302,23 +302,23 @@ public class XkGameCtrl : MonoBehaviour {
 			return;
 		}
 
-		if (TanKePlayerMark != null) {
-			TanKePlayerTran = TanKePlayerMark.transform;
-			TanKePlayerPath = TanKePlayerTran.parent.GetComponent<AiPathCtrl>();
-			pathTran = TanKePlayerPath.transform;
-			
-			for (int i = 0; i < pathTran.childCount; i++) {
-				if (TanKePlayerTran == pathTran.GetChild(i)) {
-					TanKeMarkIndex = i + 1;
-					break;
-				}
-			}
-		}
-		else {
-			Debug.LogWarning("TanKePlayerMark was wrong!");
-			obj.name = "null";
-			return;
-		}
+//		if (TanKePlayerMark != null) {
+//			TanKePlayerTran = TanKePlayerMark.transform;
+//			TanKePlayerPath = TanKePlayerTran.parent.GetComponent<AiPathCtrl>();
+//			pathTran = TanKePlayerPath.transform;
+//			
+//			for (int i = 0; i < pathTran.childCount; i++) {
+//				if (TanKePlayerTran == pathTran.GetChild(i)) {
+//					TanKeMarkIndex = i + 1;
+//					break;
+//				}
+//			}
+//		}
+//		else {
+//			Debug.LogWarning("TanKePlayerMark was wrong!");
+//			obj.name = "null";
+//			return;
+//		}
 		
 		if (CartoonCamPlayerMark != null) {
 			CartoonCamPlayerTran = CartoonCamPlayerMark.transform;
@@ -352,13 +352,13 @@ public class XkGameCtrl : MonoBehaviour {
 //			PlayerTranCurrent = obj.transform;
 			break;
 
-		case GameMode.DanJiTanKe:
-			GameJiTaiSt = GameJiTaiType.TanKeJiTai; //test
-			obj = (GameObject)Instantiate(TanKePlayer, posPlayerTK, TanKePlayerTran.rotation);
-			playerScript = obj.GetComponent<XkPlayerCtrl>();
-			playerScript.SetAiPathScript(TanKePlayerPath);
-//			PlayerTranCurrent = obj.transform;
-			break;
+//		case GameMode.DanJiTanKe:
+//			GameJiTaiSt = GameJiTaiType.TanKeJiTai; //test
+//			obj = (GameObject)Instantiate(TanKePlayer, posPlayerTK, TanKePlayerTran.rotation);
+//			playerScript = obj.GetComponent<XkPlayerCtrl>();
+//			playerScript.SetAiPathScript(TanKePlayerPath);
+////			PlayerTranCurrent = obj.transform;
+//			break;
 
 		case GameMode.LianJi:
 			Debug.Log("peerType "+Network.peerType);
@@ -609,12 +609,12 @@ public class XkGameCtrl : MonoBehaviour {
 				                                                FeiJiPlayerMark.transform.position,
 				                                                FeiJiPlayerMark.transform.rotation);
 		}
-        else {
-			NetworkServerNet.GetInstance().SpawnNetPlayerObj(TanKePlayer,
-			                                                    TanKePlayerPath,
-                                                                TanKePlayerMark.transform.position,
-                                                                TanKePlayerMark.transform.rotation);
-        }
+//        else {
+//			NetworkServerNet.GetInstance().SpawnNetPlayerObj(TanKePlayer,
+//			                                                    TanKePlayerPath,
+//                                                                TanKePlayerMark.transform.position,
+//                                                                TanKePlayerMark.transform.rotation);
+//        }
 	}
 
 	void Update()
@@ -1519,10 +1519,10 @@ public class XkGameCtrl : MonoBehaviour {
 		return FeiJiMarkIndex;
 	}
 
-	public int GetTanKeMarkIndex()
-	{
-		return TanKeMarkIndex;
-	}
+//	public int GetTanKeMarkIndex()
+//	{
+//		return TanKeMarkIndex;
+//	}
 
 	public int GetCartoonCamMarkIndex()
 	{

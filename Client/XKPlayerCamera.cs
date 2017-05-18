@@ -41,7 +41,7 @@ public class XKPlayerCamera : MonoBehaviour {
 	static Transform CameraVRTr;
 	void Awake()
 	{
-		CameraVRTr = XkGameCtrl.GetInstance().CameraVRObj[0].transform;
+//		CameraVRTr = XkGameCtrl.GetInstance().CameraVRObj[0].transform;
         if (PlayerGunCameraObj != null && PlayerGunCameraObj.Length >= 2) {
             for (int i = 0; i < 2; i++) {
                 if (PlayerGunCameraObj[i] != null) {
@@ -56,7 +56,11 @@ public class XKPlayerCamera : MonoBehaviour {
 	{	
 		CameraObj = gameObject;
 		PlayerCamera = GetComponent<Camera>();
-		PlayerCamera.targetTexture = null;
+		if (PlayerCamera != null)
+		{
+			PlayerCamera.targetTexture = null;
+		}
+
         if (PlayerMainCamTmp != null && PlayerMainCamTmp.Length >= 2) {
             PlayerMainCameraTmp = new Camera[2];
 		    if (PlayerMainCamTmp[0] != null) {
@@ -295,7 +299,10 @@ public class XKPlayerCamera : MonoBehaviour {
 			}
 		}
 		Debug.Log("SetEnableCamera -> player "+PlayerSt+", isEnable "+isEnable);
-		PlayerCamera.enabled = isEnable;
+		if (PlayerCamera != null)
+		{
+			PlayerCamera.enabled = isEnable;
+		}
 	}
 
 	public void ActivePlayerCamera()
@@ -319,7 +326,10 @@ public class XKPlayerCamera : MonoBehaviour {
 		}
 		isEnable = false;
 		Debug.Log("ActivePlayerCamera -> player "+PlayerSt+", isEnable "+isEnable+", jiTai "+jiTai);
-		PlayerCamera.enabled = isEnable;
+		if (PlayerCamera != null)
+		{
+			PlayerCamera.enabled = isEnable;
+		}
 	}
 
 	public bool GetActiveCamera()

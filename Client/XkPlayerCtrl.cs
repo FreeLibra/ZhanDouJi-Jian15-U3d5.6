@@ -35,7 +35,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 	 */
 	public AudioSource[] PlayerAudio;
 	public Transform[] NpcFirePosArray;
-	public GameObject[] PlayerHiddenArray;
+	//public GameObject[] PlayerHiddenArray;
 	public Transform[] PlayerCamPoint; //主角在服务端的跟踪点.
 	public static Transform MissionCleanup;
 	GameObject PlayerObj;
@@ -105,7 +105,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 			KaQiuShaAimPlayerTranFJ = KaQiuShaAimPoint;
 			if (XkGameCtrl.IsTiaoGuoStartCartoon && !XkGameCtrl.GetInstance().IsOpenVR) {
 //				PlayerHiddenArray[0].SetActive(false);
-				PlayerHiddenArray[1].SetActive(false);
+				//PlayerHiddenArray[1].SetActive(false);
 			}
 			Invoke("DelaySetFeiJiNpcInfo", 1f);
 			break;
@@ -144,7 +144,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 			if (XkGameCtrl.GameModeVal == GameMode.LianJi) {
 				if (Network.peerType != NetworkPeerType.Disconnected) {
 //					PlayerHiddenArray[0].SetActive(false);
-					PlayerHiddenArray[1].SetActive(false);
+					//PlayerHiddenArray[1].SetActive(false);
 				}
 //				else {
 //					PlayerHiddenArray[0].SetActive(false);
@@ -154,7 +154,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 //				if (!XkGameCtrl.GetInstance().IsOpenVR) {
 //					PlayerHiddenArray[0].SetActive(false);
 //				}
-				PlayerHiddenArray[1].SetActive(false);
+				//PlayerHiddenArray[1].SetActive(false);
 			}
 		}
 		else {
@@ -379,9 +379,9 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 				tran = XkGameCtrl.GetInstance().FeiJiPlayerMark.transform;
 				break;
 				
-			case PlayerTypeEnum.TanKe:
-				tran = XkGameCtrl.GetInstance().TanKePlayerMark.transform;
-				break;
+//			case PlayerTypeEnum.TanKe:
+//				tran = XkGameCtrl.GetInstance().TanKePlayerMark.transform;
+//				break;
 			}
 			transform.position = tran.position;
 			transform.rotation = tran.rotation;
@@ -839,9 +839,9 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 			MarkCount = XkGameCtrl.GetInstance().GetFeiJiMarkIndex() - 1;
 			break;
 
-		case PlayerTypeEnum.TanKe:
-			MarkCount = XkGameCtrl.GetInstance().GetTanKeMarkIndex() - 1;
-			break;
+//		case PlayerTypeEnum.TanKe:
+//			MarkCount = XkGameCtrl.GetInstance().GetTanKeMarkIndex() - 1;
+//			break;
 
 		case PlayerTypeEnum.CartoonCamera:
 			MarkCount = XkGameCtrl.GetInstance().GetCartoonCamMarkIndex() - 1;
