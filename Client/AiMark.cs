@@ -92,7 +92,7 @@ public class AiMark : MonoBehaviour
 			return;
 		}
 
-		XkPlayerCtrl playerScript = other.GetComponent<XkPlayerCtrl>();
+		XkPlayerCtrl playerScript = XkGameCtrl.GetPlayerScript(other.gameObject);
 		if (playerScript == null) {
 			return;
 		}

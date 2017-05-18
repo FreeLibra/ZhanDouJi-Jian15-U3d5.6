@@ -72,7 +72,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 	XKPlayerCamera PlayerCamera;
 	PlayerZhiShengJiCtrl PlayerZhiShengJiScript;
 	int MarkCount;
-	public bool IsTestDrawPath;
+//	public bool IsTestDrawPath;
 	XKPlayerAutoFire PlayerAutoFireScript;
 //	NetworkView NetViewCom;
 	bool IsHandleRpc;
@@ -162,17 +162,9 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 		}
 	}
 
-	void OnDrawGizmosSelected()
+	public void OnDrawPlayerPath()
 	{
-		if (!XkGameCtrl.IsDrawGizmosObj) {
-			return;
-		}
-
-		if (!enabled) {
-			return;
-		}
-
-		if (!IsTestDrawPath || AiPathScript == null) {
+		if (AiPathScript == null) {
 			return;
 		}
 

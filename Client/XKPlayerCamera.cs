@@ -22,6 +22,7 @@ public class XKPlayerCamera : MonoBehaviour {
 	float TimeCheckAimNpcLast;
 	Camera PlayerCamera;
 	PlayerTypeEnum PlayerSt = PlayerTypeEnum.FeiJi;
+	public bool IsTestDrawPath; //测试的时候查看主角路径.
 	static XKPlayerCamera _InstanceFeiJi;
 	public static XKPlayerCamera GetInstanceFeiJi()
 	{
@@ -80,8 +81,8 @@ public class XKPlayerCamera : MonoBehaviour {
         }
 
         CameraTran = transform;
-		XkPlayerCtrl script = GetComponentInParent<XkPlayerCtrl>();
-		switch (script.PlayerSt) {
+		PlayerScript = GetComponentInParent<XkPlayerCtrl>();
+		switch (PlayerScript.PlayerSt) {
 		case PlayerTypeEnum.FeiJi:
 			_InstanceFeiJi = this;
 			PlayerSt = PlayerTypeEnum.FeiJi;
@@ -114,7 +115,6 @@ public class XKPlayerCamera : MonoBehaviour {
 			XkGameCtrl.GetInstance().ChangeAudioListParent();
 		}
 
-		PlayerScript = GetComponentInParent<XkPlayerCtrl>();
 		if (PlayerScript != null) {
 			PlayerScript.SetPlayerCamera(this);
 		}
@@ -659,5 +659,26 @@ public class XKPlayerCamera : MonoBehaviour {
 			CameraTran.rotation = CameraParent.rotation;
 			break;
 		}
+	}
+
+	public XkPlayerCtrl GetPlayerScript()
+	{
+		return PlayerScript;
+	}
+
+	void OnDrawGizmosSelected()
+	{
+		if (!XkGameCtrl.IsDrawGizmosObj) {
+			return;
+		}
+		
+		if (!enabled) {
+			return;
+		}
+		
+		if (!IsTestDrawPath || PlayerScript == null) {
+			return;
+		}
+		PlayerScript.OnDrawPlayerPath();
 	}
 }

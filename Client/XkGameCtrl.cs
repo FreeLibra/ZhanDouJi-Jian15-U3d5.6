@@ -1872,6 +1872,15 @@ public class XkGameCtrl : MonoBehaviour {
 		}
 	}
 
+	public static XkPlayerCtrl GetPlayerScript(GameObject obj)
+	{
+		XKPlayerCamera playerCamera = obj.GetComponent<XKPlayerCamera>();
+		if (playerCamera == null) {
+			return null;
+		}
+		return playerCamera.GetPlayerScript();
+	}
+
 	void OnGUI()
 	{
 		TestNetInfo();
