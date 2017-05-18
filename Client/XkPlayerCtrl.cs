@@ -14,7 +14,7 @@ public class XkPlayerCtrl : MonoBehaviour {
 	public GameObject HongDengObj;
 	AiPathCtrl AiPathScript;
 	public PlayerTypeEnum PlayerSt = PlayerTypeEnum.FeiJi;
-	public Transform KaQiuShaAimPoint;
+//	public Transform KaQiuShaAimPoint;
 	/**
 1．主角飞机机枪开枪音效（3D音效）（主角飞机和坦克相互听得见）.
 2．主角飞机打高爆弹音效（3D音效）（主角飞机和坦克相互听得见）.
@@ -102,7 +102,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 		case PlayerTypeEnum.FeiJi:
 			InstanceFeiJi = this;
 			PlayerTranFeiJi = transform;
-			KaQiuShaAimPlayerTranFJ = KaQiuShaAimPoint;
+//			KaQiuShaAimPlayerTranFJ = KaQiuShaAimPoint;
 			if (XkGameCtrl.IsTiaoGuoStartCartoon/* && !XkGameCtrl.GetInstance().IsOpenVR*/) {
 //				PlayerHiddenArray[0].SetActive(false);
 				//PlayerHiddenArray[1].SetActive(false);
@@ -113,7 +113,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 		case PlayerTypeEnum.TanKe:
 			InstanceTanKe = this;
 			PlayerTranTanKe = transform;
-			KaQiuShaAimPlayerTranTK = KaQiuShaAimPoint;
+//			KaQiuShaAimPlayerTranTK = KaQiuShaAimPoint;
 			break;
 
 		case PlayerTypeEnum.CartoonCamera:

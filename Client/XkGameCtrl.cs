@@ -101,11 +101,11 @@ public class XkGameCtrl : MonoBehaviour {
 	public static float ScreenWidth = 1920f;
 	public static float ScreenHeight = 1080f;
 	public static string TerrainLayer = "Terrain";
-	int[] ShiBingXunZhangJB = {10, 20};
-	int[] TanKeXunZhangJB = {10, 20};
-	int[] ChuanBoXunZhangJB = {10, 20};
-	int[] FeiJiXunZhangJB = {10, 20};
-	int[] XunZhangZP = {100, 200, 300};
+//	int[] ShiBingXunZhangJB = {10, 20};
+//	int[] TanKeXunZhangJB = {10, 20};
+//	int[] ChuanBoXunZhangJB = {10, 20};
+//	int[] FeiJiXunZhangJB = {10, 20};
+//	int[] XunZhangZP = {100, 200, 300};
 	[Range(0f, 100f)]float MinRandTimeServer = 5f;
 	[Range(0f, 100f)]float MaxRandTimeServer = 15f;
 	public GameObject GameFpsPrefab;
