@@ -584,7 +584,8 @@ public class XkGameCtrl : MonoBehaviour {
 		case GameJiTaiType.Null:
 		case GameJiTaiType.FeiJiJiTai:
 			if (XkPlayerCtrl.GetInstanceFeiJi() != null) {
-				AudioManager.Instance.SetParentTran(XkPlayerCtrl.GetInstanceFeiJi().transform);
+//				AudioManager.Instance.SetParentTran(XkPlayerCtrl.GetInstanceFeiJi().transform);
+				AudioManager.Instance.SetParentTran(XKPlayerCamera.GetInstanceFeiJi().transform);
 			}
 			break;
 

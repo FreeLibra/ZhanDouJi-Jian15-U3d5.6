@@ -108,6 +108,10 @@ public class XKPlayerCamera : MonoBehaviour {
 			}
 			break;
 		}
+		
+		if (PlayerSt != PlayerTypeEnum.CartoonCamera) {
+			XkGameCtrl.GetInstance().ChangeAudioListParent();
+		}
 
 		PlayerScript = GetComponentInParent<XkPlayerCtrl>();
 		if (PlayerScript != null) {
