@@ -112,9 +112,9 @@ public class XKTriggerClosePlayerUI : MonoBehaviour {
 					XkPlayerCtrl.GetInstanceTanKe().MakePlayerMoveToAiMark(TanKeMarkCom);
 				}
 				
-				if (XkGameCtrl.GetInstance().IsServerCameraTest) {
-					ServerPortCameraCtrl.CloseAllServerPortCamera();
-				}
+//				if (XkGameCtrl.GetInstance().IsServerCameraTest) {
+//					ServerPortCameraCtrl.CloseAllServerPortCamera();
+//				}
 				break;
 			}
 		}
@@ -190,9 +190,9 @@ public class XKTriggerClosePlayerUI : MonoBehaviour {
 					XkPlayerCtrl.GetInstanceTanKe().MakePlayerMoveToAiMark(TanKeMarkCom);
 				}
 				
-				if (XkGameCtrl.GetInstance().IsServerCameraTest) {
-					ServerPortCameraCtrl.CloseAllServerPortCamera();
-				}
+//				if (XkGameCtrl.GetInstance().IsServerCameraTest) {
+//					ServerPortCameraCtrl.CloseAllServerPortCamera();
+//				}
 				break;
 			}
 		}

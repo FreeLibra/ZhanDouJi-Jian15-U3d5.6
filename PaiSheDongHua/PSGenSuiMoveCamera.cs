@@ -58,7 +58,7 @@ public class PSGenSuiMoveCamera : MonoBehaviour {
 			return;
 		}
 
-		if (Network.peerType == NetworkPeerType.Server || XkGameCtrl.GetInstance().IsServerCameraTest) {
+		if (Network.peerType == NetworkPeerType.Server/* || XkGameCtrl.GetInstance().IsServerCameraTest*/) {
 			if (Camera.main.gameObject != XkGameCtrl.ServerCameraObj) {
 				if (Camera.main != null) {
 					Camera.main.enabled = false;

@@ -101,23 +101,24 @@ public class XkGameCtrl : MonoBehaviour {
 	public static float ScreenWidth = 1920f;
 	public static float ScreenHeight = 1080f;
 	public static string TerrainLayer = "Terrain";
-	public int[] ShiBingXunZhangJB = {10, 20};
-	public int[] TanKeXunZhangJB = {10, 20};
-	public int[] ChuanBoXunZhangJB = {10, 20};
-	public int[] FeiJiXunZhangJB = {10, 20};
-	public int[] XunZhangZP = {100, 200, 300};
-	[Range(0f, 100f)]public float MinRandTimeServer = 5f;
-	[Range(0f, 100f)]public float MaxRandTimeServer = 15f;
+	int[] ShiBingXunZhangJB = {10, 20};
+	int[] TanKeXunZhangJB = {10, 20};
+	int[] ChuanBoXunZhangJB = {10, 20};
+	int[] FeiJiXunZhangJB = {10, 20};
+	int[] XunZhangZP = {100, 200, 300};
+	[Range(0f, 100f)]float MinRandTimeServer = 5f;
+	[Range(0f, 100f)]float MaxRandTimeServer = 15f;
 	public GameObject GameFpsPrefab;
 	public GameObject AudioListPrefab;
-	public GameMode TestGameModeVal = GameMode.Null;
+	GameMode TestGameModeVal = GameMode.DanJiFeiJi;
 	public static GameMode GameModeVal = GameMode.DanJiFeiJi;
 	public static GameJiTaiType GameJiTaiSt = GameJiTaiType.FeiJiJiTai;
-	public RenderTexture TestCameraRender;
+//	RenderTexture TestCameraRender;
+	//拍摄循环动画时需要把该变量设置为true.
 	public bool IsCartoonShootTest;
 //	public bool IsActiveAllPlayerTest = true;
 	public PlayerEnum ActivePlayerTest = PlayerEnum.PlayerOne;
-	public bool IsServerCameraTest;
+//	public bool IsServerCameraTest;
 	public static string TagNull = "Untagged";
 	public static string TagMainCamera = "MainCamera";
 	public static int ShiBingNumPOne;
@@ -162,7 +163,7 @@ public class XkGameCtrl : MonoBehaviour {
 	public static bool IsGameOnQuit;
 	public static bool IsDrawGizmosObj = true;
 	public static int AmmoNumMaxNpc = 30;
-	public bool IsOpenVR = true;
+//	public bool IsOpenVR = true;
 	public static int TestGameEndLv = (int)GameLevel.Scene_2;
 	public static bool IsTiaoGuoStartCartoon = true;
 	static XkGameCtrl _Instance;
@@ -217,9 +218,9 @@ public class XkGameCtrl : MonoBehaviour {
 			Instantiate(GameFpsPrefab);
 		}
 
-		if (GameMovieCtrl.IsActivePlayer) {
-			IsOpenVR = GameMovieCtrl.IsOpenVR;
-		}
+//		if (GameMovieCtrl.IsActivePlayer) {
+//			IsOpenVR = GameMovieCtrl.IsOpenVR;
+//		}
 
 //		for (int i = 0; i < CameraVRObj.Length; i++) {
 //			if (CameraVRObj[i] != null) {
@@ -232,9 +233,9 @@ public class XkGameCtrl : MonoBehaviour {
 		CartoonTriggerSpawnList = new List<XKTriggerRemoveNpc>();
 		if (Network.peerType == NetworkPeerType.Disconnected && !NetworkServerNet.IsFindMasterServer) {
 			if (!GameMovieCtrl.IsActivePlayer) {
-				if (IsServerCameraTest) {
-					TestGameModeVal = GameMode.LianJi;
-				}
+//				if (IsServerCameraTest) {
+//					TestGameModeVal = GameMode.LianJi;
+//				}
 				GameModeVal = TestGameModeVal != GameMode.Null ? TestGameModeVal : GameModeVal; //TestGame
 			}
 			else {
@@ -272,13 +273,13 @@ public class XkGameCtrl : MonoBehaviour {
 
 		if (GameMovieCtrl.IsActivePlayer) {
 			IsCartoonShootTest = false;
-			IsServerCameraTest = false;
+//			IsServerCameraTest = false;
 		}
 		Cursor.visible = pcvr.bIsHardWare;
 
-		if (IsServerCameraTest) {
-			IsCartoonShootTest = false;
-		}
+//		if (IsServerCameraTest) {
+//			IsCartoonShootTest = false;
+//		}
 
 		NpcAmmoCtrl.NpcAmmoHitLayer = NpcAmmoHitLayer;
 		GameObject obj = null;
@@ -700,9 +701,9 @@ public class XkGameCtrl : MonoBehaviour {
 			XKPlayerCamera.GetInstanceFeiJi().GetComponent<Camera>().targetTexture = null;
 		}
 
-		if (XKPlayerCamera.GetInstanceTanKe() != null && Network.peerType == NetworkPeerType.Disconnected) {
-			XKPlayerCamera.GetInstanceTanKe().GetComponent<Camera>().targetTexture = TestCameraRender;
-		}
+//		if (XKPlayerCamera.GetInstanceTanKe() != null && Network.peerType == NetworkPeerType.Disconnected) {
+//			XKPlayerCamera.GetInstanceTanKe().GetComponent<Camera>().targetTexture = TestCameraRender;
+//		}
 
 		if(XKPlayerCamera.GetInstanceCartoon() != null) {
 			XKPlayerCamera.GetInstanceCartoon().SetActiveCamera(true);
@@ -782,7 +783,7 @@ public class XkGameCtrl : MonoBehaviour {
 			XKPlayerCamera.GetInstanceFeiJi().gameObject.tag = TagNull;
 			XKPlayerCamera.GetInstanceTanKe().gameObject.tag = TagMainCamera;
 
-			XKPlayerCamera.GetInstanceFeiJi().GetComponent<Camera>().targetTexture = TestCameraRender;
+//			XKPlayerCamera.GetInstanceFeiJi().GetComponent<Camera>().targetTexture = TestCameraRender;
 			XKPlayerCamera.GetInstanceTanKe().GetComponent<Camera>().targetTexture = null;
 //			PlayerTranCurrent = XkPlayerCtrl.GetInstanceTanKe().transform;
 			Camera.SetupCurrent(XKPlayerCamera.GetInstanceFeiJi().GetComponent<Camera>());
@@ -811,7 +812,7 @@ public class XkGameCtrl : MonoBehaviour {
 			XKPlayerCamera.GetInstanceTanKe().gameObject.tag = TagNull;
 
 			XKPlayerCamera.GetInstanceFeiJi().GetComponent<Camera>().targetTexture = null;
-			XKPlayerCamera.GetInstanceTanKe().GetComponent<Camera>().targetTexture = TestCameraRender;
+//			XKPlayerCamera.GetInstanceTanKe().GetComponent<Camera>().targetTexture = TestCameraRender;
 //			PlayerTranCurrent = XkPlayerCtrl.GetInstanceFeiJi().transform;
 			Camera.SetupCurrent(XKPlayerCamera.GetInstanceTanKe().GetComponent<Camera>());
 
@@ -1090,7 +1091,7 @@ public class XkGameCtrl : MonoBehaviour {
 			    || YouLiangCtrl.IsChangeYouLiangFillAmout
 			    || IsAddPlayerYouLiang
 			    || IsCartoonShootTest
-			    || IsServerCameraTest) {
+			    /*|| IsServerCameraTest*/) {
 				continue;
 			}
 
@@ -1507,12 +1508,13 @@ public class XkGameCtrl : MonoBehaviour {
 			JiFenJieMianCtrl.GetInstance().ShowFinishTaskInfo();
 		}
 
-		if (_Instance.IsOpenVR) {
-			XKFinishTaskVRCtrl.GetInstance().ShowFinishTask();
-		}
-		else {
-			LoadingGameMovie();
-		}
+//		if (_Instance.IsOpenVR) {
+//			XKFinishTaskVRCtrl.GetInstance().ShowFinishTask();
+//		}
+//		else {
+//			LoadingGameMovie();
+//		}
+		LoadingGameMovie();
 	}
 	
 	public int GetFeiJiMarkIndex()

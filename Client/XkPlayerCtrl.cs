@@ -103,7 +103,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 			InstanceFeiJi = this;
 			PlayerTranFeiJi = transform;
 			KaQiuShaAimPlayerTranFJ = KaQiuShaAimPoint;
-			if (XkGameCtrl.IsTiaoGuoStartCartoon && !XkGameCtrl.GetInstance().IsOpenVR) {
+			if (XkGameCtrl.IsTiaoGuoStartCartoon/* && !XkGameCtrl.GetInstance().IsOpenVR*/) {
 //				PlayerHiddenArray[0].SetActive(false);
 				//PlayerHiddenArray[1].SetActive(false);
 			}

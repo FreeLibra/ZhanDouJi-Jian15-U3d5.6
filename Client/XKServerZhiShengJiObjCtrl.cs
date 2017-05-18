@@ -7,7 +7,7 @@ public class XKServerZhiShengJiObjCtrl : MonoBehaviour
 	// Use this for initialization
 	void Awake()
 	{
-		if (Network.peerType == NetworkPeerType.Server || XkGameCtrl.GetInstance().IsServerCameraTest) {
+		if (Network.peerType == NetworkPeerType.Server/* || XkGameCtrl.GetInstance().IsServerCameraTest*/) {
 			HiddenZhiShengJiObj.SetActive(false);
 		}
 	}

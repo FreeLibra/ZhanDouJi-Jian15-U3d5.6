@@ -45,7 +45,8 @@ public class XKPlayerCamera : MonoBehaviour {
         if (PlayerGunCameraObj != null && PlayerGunCameraObj.Length >= 2) {
             for (int i = 0; i < 2; i++) {
                 if (PlayerGunCameraObj[i] != null) {
-                    PlayerGunCameraObj[i].SetActive(XkGameCtrl.GetInstance().IsOpenVR);
+//                    PlayerGunCameraObj[i].SetActive(XkGameCtrl.GetInstance().IsOpenVR);
+                    PlayerGunCameraObj[i].SetActive(false);
                 }
             }
         }
@@ -65,16 +66,16 @@ public class XKPlayerCamera : MonoBehaviour {
             PlayerMainCameraTmp = new Camera[2];
 		    if (PlayerMainCamTmp[0] != null) {
 			    PlayerMainCameraTmp[0] = PlayerMainCamTmp[0].GetComponent<Camera>();
-			    if (XkGameCtrl.GetInstance().IsOpenVR) {
-				    PlayerMainCamTmp[0].SetActive(false);
-			    }
+//			    if (XkGameCtrl.GetInstance().IsOpenVR) {
+//				    PlayerMainCamTmp[0].SetActive(false);
+//			    }
 		    }
 
 		    if (PlayerMainCamTmp[1] != null) {
 			    PlayerMainCameraTmp[1] = PlayerMainCamTmp[1].GetComponent<Camera>();
-			    if (XkGameCtrl.GetInstance().IsOpenVR) {
-				    PlayerMainCamTmp[1].SetActive(false);
-			    }
+//			    if (XkGameCtrl.GetInstance().IsOpenVR) {
+//				    PlayerMainCamTmp[1].SetActive(false);
+//			    }
             }
         }
 
@@ -189,9 +190,9 @@ public class XKPlayerCamera : MonoBehaviour {
 	public static int IndexPlayerNum = -1;
 	public void SetActivePlayerGunCameraObj(int indexVal)
 	{
-		if (!XkGameCtrl.GetInstance().IsOpenVR) {
-			return;
-		}
+//		if (!XkGameCtrl.GetInstance().IsOpenVR) {
+//			return;
+//		}
 
         if (PlayerGunCameraObj == null || PlayerGunCameraObj.Length < 2) {
             return;
@@ -230,13 +231,13 @@ public class XKPlayerCamera : MonoBehaviour {
 		}
 		IndexPlayerNum++;
 
-		SetActivePlayerGunCameraObj(IndexPlayerNum);
+//		SetActivePlayerGunCameraObj(IndexPlayerNum);
 		switch (IndexPlayerNum) {
 		case 0:
-			if (!XkGameCtrl.GetInstance().IsOpenVR) {
-				PlayerMainCameraTmp[0].enabled = true;
-				PlayerMainCameraTmp[1].enabled = false;
-			}
+			PlayerMainCameraTmp[0].enabled = true;
+			PlayerMainCameraTmp[1].enabled = false;
+//			if (!XkGameCtrl.GetInstance().IsOpenVR) {
+//			}
 //			else {
 //				PlayerMainCameraTmp[0].enabled = false;
 //				PlayerMainCameraTmp[1].enabled = false;
@@ -258,10 +259,12 @@ public class XKPlayerCamera : MonoBehaviour {
 			}
 			break;
 		case 1:
-			if (!XkGameCtrl.GetInstance().IsOpenVR) {
-				PlayerMainCameraTmp[0].enabled = false;
-				PlayerMainCameraTmp[1].enabled = true;
-			}
+			PlayerMainCameraTmp[0].enabled = false;
+			PlayerMainCameraTmp[1].enabled = true;
+//			if (!XkGameCtrl.GetInstance().IsOpenVR) {
+//				PlayerMainCameraTmp[0].enabled = false;
+//				PlayerMainCameraTmp[1].enabled = true;
+//			}
 //			else {
 //				PlayerMainCameraTmp[0].enabled = false;
 //				PlayerMainCameraTmp[1].enabled = false;
@@ -545,9 +548,9 @@ public class XKPlayerCamera : MonoBehaviour {
 
 	public void SetAimTranInfo(AiMark markScript)
 	{
-		if (XkGameCtrl.GetInstance().IsOpenVR) {
-			return;
-		}
+//		if (XkGameCtrl.GetInstance().IsOpenVR) {
+//			return;
+//		}
 
 		if (AimNpcObj != null) {
 //			Debug.Log("SetAimTranInfo -> AimNpcObj should be null");

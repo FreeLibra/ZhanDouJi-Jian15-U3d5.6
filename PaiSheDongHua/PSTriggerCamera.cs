@@ -36,7 +36,7 @@ public class PSTriggerCamera : MonoBehaviour {
 	{
 		if (Network.peerType != NetworkPeerType.Server) {
 			if (GameMovieCtrl.IsActivePlayer
-			    || (!XkGameCtrl.GetInstance().IsCartoonShootTest && !XkGameCtrl.GetInstance().IsServerCameraTest)) {
+			    || (!XkGameCtrl.GetInstance().IsCartoonShootTest/* && !XkGameCtrl.GetInstance().IsServerCameraTest*/)) {
 				gameObject.SetActive(false);
 			}
 			return;
@@ -196,7 +196,7 @@ public class PSTriggerCamera : MonoBehaviour {
 		CheckZiYouMoveCam(script);
 		CheckDingDianNoAimCam();
 
-		if (GameMovieCtrl.IsActivePlayer || XkGameCtrl.GetInstance().IsServerCameraTest) {
+		if (GameMovieCtrl.IsActivePlayer/* || XkGameCtrl.GetInstance().IsServerCameraTest*/) {
 			return;
 		}
 		CheckCameraTimeShake();
@@ -264,7 +264,7 @@ public class PSTriggerCamera : MonoBehaviour {
 			return;
 		}
 		
-		if (Network.peerType == NetworkPeerType.Server || XkGameCtrl.GetInstance().IsServerCameraTest) {
+		if (Network.peerType == NetworkPeerType.Server/* || XkGameCtrl.GetInstance().IsServerCameraTest*/) {
 			if (Camera.main.gameObject != XkGameCtrl.ServerCameraObj) {
 				if (Camera.main != null) {
 					Camera.main.enabled = false;

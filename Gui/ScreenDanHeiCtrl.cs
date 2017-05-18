@@ -240,7 +240,7 @@ public class ScreenDanHeiCtrl : MonoBehaviour {
 			ScreenDanHeiObj.SetActive(false);
 		}
 
-		if (XkGameCtrl.GetInstance().IsServerCameraTest || Network.peerType == NetworkPeerType.Server) {
+		if (/*XkGameCtrl.GetInstance().IsServerCameraTest || */Network.peerType == NetworkPeerType.Server) {
 			XkGameCtrl.ActiveServerCameraTran();
 			if (XKPlayerCamera.GetInstanceFeiJi() != null) {
 				XKPlayerCamera.GetInstanceFeiJi().SetEnableCamera(false);
@@ -256,7 +256,7 @@ public class ScreenDanHeiCtrl : MonoBehaviour {
 	{
 		if (IsCanOpenUI
 			&& !XkGameCtrl.GetInstance().IsCartoonShootTest
-		    && !XkGameCtrl.GetInstance().IsServerCameraTest) {
+		    /*&& !XkGameCtrl.GetInstance().IsServerCameraTest*/) {
 			if (Network.peerType != NetworkPeerType.Server) {
 				GameUiCamera.enabled = true;
 			}
@@ -282,7 +282,7 @@ public class ScreenDanHeiCtrl : MonoBehaviour {
 	{
 		if (!IsCanOpenUI
 			|| XkGameCtrl.GetInstance().IsCartoonShootTest
-		    || XkGameCtrl.GetInstance().IsServerCameraTest) {
+		    /*|| XkGameCtrl.GetInstance().IsServerCameraTest*/) {
 			return;
 		}
 		GameUiCamera.enabled = true;

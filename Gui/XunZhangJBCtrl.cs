@@ -63,10 +63,10 @@ public class XunZhangJBCtrl : MonoBehaviour {
 //		XkGameCtrl.FeiJiNumPTwo = 0; //test
 //		XkGameCtrl.ChuanBoNumPTwo = 5; //test
 
-		ShiBingXunZhangJB = XkGameCtrl.GetInstance().ShiBingXunZhangJB;
-		TanKeXunZhangJB = XkGameCtrl.GetInstance().TanKeXunZhangJB;
-		ChuanBoXunZhangJB = XkGameCtrl.GetInstance().ChuanBoXunZhangJB;
-		FeiJiXunZhangJB = XkGameCtrl.GetInstance().FeiJiXunZhangJB;
+//		ShiBingXunZhangJB = XkGameCtrl.GetInstance().ShiBingXunZhangJB;
+//		TanKeXunZhangJB = XkGameCtrl.GetInstance().TanKeXunZhangJB;
+//		ChuanBoXunZhangJB = XkGameCtrl.GetInstance().ChuanBoXunZhangJB;
+//		FeiJiXunZhangJB = XkGameCtrl.GetInstance().FeiJiXunZhangJB;
 
 		switch (PlayerSt) {
 		case PlayerEnum.PlayerOne:

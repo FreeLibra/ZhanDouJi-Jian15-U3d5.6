@@ -4,8 +4,8 @@ using System.Collections;
 public class ServerPortCameraCtrl : MonoBehaviour {
 	public PlayerTypeEnum CameraType = PlayerTypeEnum.FeiJi;
 	[Range(0.001f, 1f)]public float FeiJiFollowSpeed = 0.015f;
-	float MinRandTime;
-	float MaxRandTime;
+	float MinRandTime = 1;
+	float MaxRandTime = 5;
 	static bool IsFollowTest = true;
 	static int CountFJ;
 	static int CountTK;
@@ -40,8 +40,8 @@ public class ServerPortCameraCtrl : MonoBehaviour {
 		CameraTran = transform;
 		CameraObj = gameObject;
 
-		MinRandTime = XkGameCtrl.GetInstance().MinRandTimeServer;
-		MaxRandTime = XkGameCtrl.GetInstance().MaxRandTimeServer;
+//		MinRandTime = XkGameCtrl.GetInstance().MinRandTimeServer;
+//		MaxRandTime = XkGameCtrl.GetInstance().MaxRandTimeServer;
 	}
 	
 	// Update is called once per frame

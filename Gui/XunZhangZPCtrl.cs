@@ -55,7 +55,7 @@ public class XunZhangZPCtrl : MonoBehaviour {
 		if (XunZhangUITexture.gameObject.activeSelf) {
 			return;
 		}
-		XunZhangZP = XkGameCtrl.GetInstance().XunZhangZP;
+//		XunZhangZP = XkGameCtrl.GetInstance().XunZhangZP;
 
 		int xunZhangIndex = -1;
 		switch (PlayerSt) {

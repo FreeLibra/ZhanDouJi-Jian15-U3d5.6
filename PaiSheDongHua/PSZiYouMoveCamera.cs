@@ -27,7 +27,7 @@ public class PSZiYouMoveCamera : MonoBehaviour {
 	{
 		if (Network.peerType != NetworkPeerType.Server) {
 			if (GameMovieCtrl.IsActivePlayer
-			    || (!XkGameCtrl.GetInstance().IsCartoonShootTest && !XkGameCtrl.GetInstance().IsServerCameraTest)) {
+			    || (!XkGameCtrl.GetInstance().IsCartoonShootTest/* && !XkGameCtrl.GetInstance().IsServerCameraTest*/)) {
 				gameObject.SetActive(false);
 			}
 			return;
@@ -165,7 +165,7 @@ public class PSZiYouMoveCamera : MonoBehaviour {
 	public void MoveCameraByItween(XkPlayerCtrl playerScript)
 	{
 		ZYMoveCamera = gameObject;
-		if (Network.peerType == NetworkPeerType.Server || XkGameCtrl.GetInstance().IsServerCameraTest) {
+		if (Network.peerType == NetworkPeerType.Server/* || XkGameCtrl.GetInstance().IsServerCameraTest*/) {
 			if (Camera.main.gameObject != XkGameCtrl.ServerCameraObj) {
 				if (Camera.main != null) {
 					Camera.main.enabled = false;
