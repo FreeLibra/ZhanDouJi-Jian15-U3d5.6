@@ -214,7 +214,9 @@ public class XKNpcAnimatorCtrl : MonoBehaviour {
 
 	void StartSpawnNpcAmmo()
 	{
-		if (AudioNpcFire != null) {
+		if (AudioNpcFire != null
+		    && AudioNpcFire.enabled
+		    && AudioNpcFire.clip != null) {
 			if (AudioNpcFire.isPlaying) {
 				AudioNpcFire.Stop();
 			}

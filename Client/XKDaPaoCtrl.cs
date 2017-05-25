@@ -45,7 +45,7 @@ public class XKDaPaoCtrl : MonoBehaviour {
 //		Debug.Log("DelayChangeNpcParent -> IsHuoCheNpc "+IsHuoCheNpc+", name "+gameObject.name);
 		if (!IsHuoCheNpc) {
 			if (transform.parent == null) {
-				transform.parent = XkGameCtrl.MissionCleanup;
+				transform.parent = XkGameCtrl.NpcDtArray;
 			}
 		}
 	}

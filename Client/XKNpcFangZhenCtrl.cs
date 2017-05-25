@@ -24,6 +24,15 @@ public class XKNpcFangZhenCtrl : MonoBehaviour {
 	//int NpcId;
 	void Awake()
 	{
+		if (NpcFirePointGroup != null) {
+			MeshRenderer[] meshComArray = NpcFirePointGroup.GetComponentsInChildren<MeshRenderer>();
+			if (meshComArray != null) {
+				for (int i = 0; i < meshComArray.Length; i++) {
+					meshComArray[i].enabled = false;
+				}
+			}
+		}
+
 		//NpcId = GetInstanceID();
 //		if (NetViewCom == null) {
 //			NetViewCom = GetComponent<NetworkView>();
@@ -32,7 +41,7 @@ public class XKNpcFangZhenCtrl : MonoBehaviour {
 //		if (Network.peerType == NetworkPeerType.Disconnected) {
 //			NetViewCom.enabled = false;
 //		}
-		transform.parent = XkGameCtrl.MissionCleanup;
+		transform.parent = XkGameCtrl.NpcDtArray;
 	}
 
 	void Update()
@@ -467,7 +476,7 @@ public class XKNpcFangZhenCtrl : MonoBehaviour {
 				if (NpcMoveScript[i] != null) {
 					NpcMoveScript[i].TriggerRemovePointNpc(0);
 					npcChildTran = NpcMoveScript[i].transform;
-					npcChildTran.parent = XkGameCtrl.MissionCleanup;
+					npcChildTran.parent = XkGameCtrl.NpcDtArray;
 				}
 			}
 			//Debug.Log("****max "+max+", fangZhenObj "+NpcObj.name);

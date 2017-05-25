@@ -59,6 +59,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 	NpcFireAction FireAnimation;
 	Transform MarkNpcMove;
 	bool IsMoveToMarkPoint;
+	XKNpcWheelRotCtrl NpcWheelRotCtrl;
 //	NetworkView NetViewCom;
 	int RecordAimPlayerState = -1;
 	bool IsHandleRpc;
@@ -87,6 +88,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 		//XkGameCtrl.GetInstance().AddNpcTranToList(NpcTran);
 		MakeLandNpcMoveToLand();
 		Invoke("DelayChangeNpcParent", 0.2f);
+		NpcWheelRotCtrl = GetComponent<XKNpcWheelRotCtrl>();
 		
 		/*if (NpcState == NpcType.FlyNpc) {
 			NpcJiFen = NpcJiFenEnum.FeiJi;
@@ -97,7 +99,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 	{
 		if (!IsHuoCheNpc) {
 			if (transform.parent == null) {
-				transform.parent = XkGameCtrl.MissionCleanup;
+				transform.parent = XkGameCtrl.NpcDtArray;
 			}
 		}
 	}
@@ -675,6 +677,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 	XKCannonCtrl[] CannonScript;
 	public void SetSpawnNpcInfo(XKSpawnNpcPoint spawnScript)
 	{
+		StopWheelRot();
 		SendNpcTransformInfo();
 		SetNpcSpawnScriptInfo(spawnScript);
 		IsHuoCheNpc = spawnScript.GetIsHuoCheNpc();
@@ -884,6 +887,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 				MarkTranAimForward = MarkTranAim.position - NpcTran.position;
 			}
 
+			PlayWheelRot();
 			iTween.MoveTo(NpcObj, iTween.Hash("path", tranArray,
 			                                  "speed", MvSpeed,
 			                                  "orienttopath", isOrienttopath,
@@ -1274,6 +1278,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 			else {
 				MakeNpcPlayRootAnimation();
 			}
+			StopWheelRot();
 			return;
 		}
 
@@ -1434,15 +1439,15 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 			StartCoroutine(DestroyNetNpcObj(NpcObj));
 		}
 		else {
-			if (NpcTran.parent != XkGameCtrl.MissionCleanup) {
-				NpcTran.parent = XkGameCtrl.MissionCleanup;
+			if (NpcTran.parent != XkGameCtrl.NpcDtArray) {
+				NpcTran.parent = XkGameCtrl.NpcDtArray;
 			}
 
 			if (Vector3.Distance(Vector3.zero, RealNpcTran.localPosition) > 0.1f
 			    && Network.peerType == NetworkPeerType.Disconnected) {
 				//Debug.Log("fix realnpc localPosition, name "+NpcObj.name);
 				Vector3 posTmpVal = RealNpcTran.position;
-				RealNpcTran.parent = XkGameCtrl.MissionCleanup;
+				RealNpcTran.parent = XkGameCtrl.NpcDtArray;
 				NpcObj.transform.position = posTmpVal;
 				RealNpcTran.parent = NpcObj.transform;
 				RealNpcTran.localPosition = Vector3.zero;
@@ -1886,6 +1891,22 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 			}
 			NpcAniScript.ResetNpcAnimation();
 		}
+	}
+	
+	void PlayWheelRot()
+	{
+		if (NpcWheelRotCtrl == null) {
+			return;
+		}
+		NpcWheelRotCtrl.PlayWheelRot();
+	}
+	
+	void StopWheelRot()
+	{
+		if (NpcWheelRotCtrl == null) {
+			return;
+		}
+		NpcWheelRotCtrl.StopWheelRot();
 	}
 }
 

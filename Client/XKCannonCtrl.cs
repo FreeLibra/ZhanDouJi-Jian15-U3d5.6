@@ -599,17 +599,17 @@ public class XKCannonCtrl : MonoBehaviour {
 						}
 					}
 
-					if (DaPaoAmmoLiZiObj[0] == null) {
+					if (DaPaoAmmoLiZiObj[0] == null && DaPaoAmmoLiZi != null) {
 						obj = (GameObject)Instantiate(DaPaoAmmoLiZi, SpawnAmmoPoint[0].position, SpawnAmmoPoint[0].rotation);
 						tran = obj.transform;
 						DaPaoAmmoLiZiObj[0] = obj;
 						XkGameCtrl.CheckObjDestroyThisTimed(obj);
+						
+						if (!SpawnAmmoPoint[0].gameObject.activeSelf) {
+							SpawnAmmoPoint[0].gameObject.SetActive(true);
+						}
+						tran.parent = SpawnAmmoPoint[0];
 					}
-
-					if (!SpawnAmmoPoint[0].gameObject.activeSelf) {
-						SpawnAmmoPoint[0].gameObject.SetActive(true);
-					}
-					tran.parent = SpawnAmmoPoint[0];
 				}
 			}
 			else {
@@ -677,18 +677,18 @@ public class XKCannonCtrl : MonoBehaviour {
 				}
 			}
 
-			if (DaPaoAmmoLiZiObj[count] == null) {
+			if (DaPaoAmmoLiZiObj[count] == null && DaPaoAmmoLiZi != null) {
 				obj = (GameObject)Instantiate(DaPaoAmmoLiZi, SpawnAmmoPoint[count].position, SpawnAmmoPoint[count].rotation);
 				tran = obj.transform;
 				DaPaoAmmoLiZiObj[count] = obj;
 				XkGameCtrl.CheckObjDestroyThisTimed(obj);
-			}
-
-			if (IsHiddenAmmoSpawnPoint) {
-				tran.parent = XkGameCtrl.NpcAmmoArray;
-			}
-			else {
-				tran.parent = SpawnAmmoPoint[count];
+				
+				if (IsHiddenAmmoSpawnPoint) {
+					tran.parent = XkGameCtrl.NpcAmmoArray;
+				}
+				else {
+					tran.parent = SpawnAmmoPoint[count];
+				}
 			}
 
 			yield return new WaitForSeconds(TimeAmmoUnit);

@@ -47,6 +47,13 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 	// Use this for initialization
 	void Awake()
 	{
+		MeshRenderer[] meshComArray = GetComponentsInChildren<MeshRenderer>();
+		if (meshComArray != null) {
+			for (int i = 0; i < meshComArray.Length; i++) {
+				meshComArray[i].enabled = false;
+			}
+		}
+
         if (XkGameCtrl.GameJiTaiSt == GameJiTaiType.FeiJiJiTai) {
             PointType = SpawnPointType.KongZhong;
         }
@@ -333,7 +340,7 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 				return;
 			}
 
-			obj.transform.parent = XkGameCtrl.MissionCleanup;
+			obj.transform.parent = XkGameCtrl.NpcDtArray;
 			HuoCheScript = obj.GetComponent<XKHuoCheCtrl>();
 			HuoCheScript.SetHuoCheInfo(this);
 			//HuoCheScript.StartMoveHuoChe(NpcPath);
@@ -351,7 +358,7 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 			}
 
 			if (!IsHuoCheNpc) {
-				obj.transform.parent = XkGameCtrl.MissionCleanup;
+				obj.transform.parent = XkGameCtrl.NpcDtArray;
 			}
 			else {
 				obj.transform.parent = transform.parent;
@@ -382,7 +389,7 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 			
 			XKNpcMoveCtrl npcScript = null;
 			Transform fangZhenTran = fangZhenObj.transform;
-			fangZhenTran.parent = XkGameCtrl.MissionCleanup;
+			fangZhenTran.parent = XkGameCtrl.NpcDtArray;
 			obj = SpawnPointNpc(NpcObj, transform.position, transform.rotation);
 			if (obj == null) {
 				//Debug.Log("StartSpawnNpc -> Cannot spawn FangZhenChildNpc --- 1");
@@ -449,7 +456,7 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 		}
 
 		if (!IsHuoCheNpc) {
-			obj.transform.parent = XkGameCtrl.MissionCleanup;
+			obj.transform.parent = XkGameCtrl.NpcDtArray;
 		}
 		else {
 			obj.transform.parent = transform.parent;

@@ -94,6 +94,7 @@ public class XkGameCtrl : MonoBehaviour {
 	public static Transform MissionCleanup;
 	public static Transform NpcAmmoArray;
 	public static Transform PlayerAmmoArray;
+	public static Transform NpcDtArray;
 	List<Transform> NpcTranList = new List<Transform>(20);
 	static List<YouLiangDianMoveCtrl> YLDLvA = new List<YouLiangDianMoveCtrl>(20);
 	static List<YouLiangDianMoveCtrl> YLDLvB = new List<YouLiangDianMoveCtrl>(20);
@@ -417,6 +418,11 @@ public class XkGameCtrl : MonoBehaviour {
 		objMiss.name = "PlayerAmmoArray";
 		objMiss.transform.parent = MissionCleanup;
 		PlayerAmmoArray = objMiss.transform;
+		
+		objMiss = new GameObject();
+		objMiss.name = "NpcDtArray";
+		objMiss.transform.parent = MissionCleanup;
+		NpcDtArray = objMiss.transform;
 		XKNpcSpawnListCtrl.GetInstance();
 
 		DaoDanNum = DaoDanNum > 99 ? 99 : DaoDanNum;

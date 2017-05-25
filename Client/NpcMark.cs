@@ -42,6 +42,11 @@ public class NpcMark : MonoBehaviour {
 
 	void Start()
 	{
+		MeshRenderer meshCom = GetComponent<MeshRenderer>();
+		if (meshCom != null) {
+			meshCom.enabled = false;
+		}
+
 		CheckBoxCollider();
 		CheckAniName();
 		this.enabled = IsFireFeiJiNpc;

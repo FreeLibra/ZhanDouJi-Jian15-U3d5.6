@@ -14,6 +14,11 @@ public class XKTriggerRemoveNpc : MonoBehaviour {
 
 	void Start()
 	{
+		MeshRenderer meshCom = GetComponent<MeshRenderer>();
+		if (meshCom != null) {
+			meshCom.enabled = false;
+		}
+
 		/*switch (Mode) {
 		case TriggerMode.DanJi:
 			if (XkGameCtrl.GameModeVal == GameMode.LianJi) {
@@ -46,7 +51,7 @@ public class XKTriggerRemoveNpc : MonoBehaviour {
 			return;
 		}
 
-		if (other.GetComponent<XkPlayerCtrl>() == null) {
+		if (XkGameCtrl.GetPlayerScript(other.gameObject) == null) {
 			return;
 		}
 

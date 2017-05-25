@@ -35,7 +35,7 @@ public class XKHuoCheCtrl : MonoBehaviour {
 		}
 
 		if (transform.parent == null) {
-			transform.parent = XkGameCtrl.MissionCleanup;
+			transform.parent = XkGameCtrl.NpcDtArray;
 			NpcObj = gameObject;
 			AnimatorTran = AnimatorCom.transform;
 			NpcTran = transform;
