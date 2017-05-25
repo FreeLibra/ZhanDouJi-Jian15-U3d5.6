@@ -13,7 +13,14 @@ public enum PlayerAmmoType
 public class XKPlayerAutoFire : MonoBehaviour {
 	
 	public LayerMask FireLayer;
-	public TweenRotation[] QianGuanTwRot;
+	/**
+	 * 玩家枪的转管控制.
+	 */
+	public TweenRotation[] QiangGuanTwRot;
+	/**
+	 * 玩家子弹落点计算摄像机.
+	 */
+	public Camera[] GunCamera;
 	public Transform[] AmmoStartPosOne;
 	public Transform[] AmmoStartPosTwo;
 	public Transform[] DaoDanAmmoPosOne;
@@ -68,8 +75,8 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 	void Start()
 	{
 		//AmmoParticleList = new List<AmmoParticleDt>(6);
-		for (int i = 0; i < QianGuanTwRot.Length; i++) {
-			QianGuanTwRot[i].enabled = false;
+		for (int i = 0; i < QiangGuanTwRot.Length; i++) {
+			QiangGuanTwRot[i].enabled = false;
 		}
 		FireLayer = XkGameCtrl.GetInstance().PlayerAmmoHitLayer;
 		PlayerScript = GetComponent<XkPlayerCtrl>();
@@ -175,28 +182,28 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 
 	void SetQianGuanTwRot(PlayerEnum indexPlayer, bool isEnable)
     {
-        if (QianGuanTwRot == null || QianGuanTwRot.Length < 2) {
+		if (QiangGuanTwRot == null || QiangGuanTwRot.Length < 2) {
             return;
         }
 
         int indexVal = (int)indexPlayer - 1;
-        if (QianGuanTwRot[indexVal].enabled != isEnable) {
-			QianGuanTwRot[indexVal].enabled = isEnable;
+		if (QiangGuanTwRot[indexVal].enabled != isEnable) {
+			QiangGuanTwRot[indexVal].enabled = isEnable;
 		}
 	}
 
 	GameObject[] AmmoParticleObj = new GameObject[2];
 	void CheckPlayerOneFireBt()
 	{
-		if (XKPlayerCamera.IndexPlayerNum != 0) {
-			return;
-		}
+//		if (XKPlayerCamera.IndexPlayerNum != 0) {
+//			return;
+//		}
 
 		if (!ScreenDanHeiCtrl.IsStartGame) {
 			SetQianGuanTwRot(PlayerEnum.PlayerOne, false);
 			return;
 		}
-		
+
 		if (!XkGameCtrl.IsActivePlayerOne) {
 			SetQianGuanTwRot(PlayerEnum.PlayerOne, false);
 			return;
@@ -218,7 +225,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 			}
 		}
 
-		if (Camera.main == null) {
+		if (GunCamera[0] == null) {
 			return;
 		}
 //		if (GameOverCtrl.IsShowGameOver || JiFenJieMianCtrl.GetInstance().GetIsShowFinishTask()) {
@@ -281,9 +288,9 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 		
 		Vector3 firePos = Vector3.zero;
 		Vector3 mousePos = mousePosInput + Vector3.forward * OffsetForward;
-		Vector3 posTmp = Camera.main.ScreenToWorldPoint(mousePos);
+		Vector3 posTmp = GunCamera[0].ScreenToWorldPoint(mousePos);
 		Vector3 ammoForward = Vector3.Normalize( posTmp - ammoSpawnPos );
-		Ray ray = Camera.main.ScreenPointToRay(mousePosInput);
+		Ray ray = GunCamera[0].ScreenPointToRay(mousePosInput);
 		RaycastHit hit;
 		if (!IsPSAutoFire) {
 			firePos = FirePosValTmp * ammoForward + ammoSpawnPos;
@@ -342,10 +349,10 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 
 	void CheckPlayerTwoFireBt()
 	{
-		if (XKPlayerCamera.IndexPlayerNum != 1) {
-			SetQianGuanTwRot(PlayerEnum.PlayerTwo, false);
-			return;
-		}
+//		if (XKPlayerCamera.IndexPlayerNum != 1) {
+//			SetQianGuanTwRot(PlayerEnum.PlayerTwo, false);
+//			return;
+//		}
 
 		if (!ScreenDanHeiCtrl.IsStartGame) {
 			SetQianGuanTwRot(PlayerEnum.PlayerTwo, false);
@@ -373,7 +380,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 			}
 		}
 		
-		if (Camera.main == null) {
+		if (GunCamera[1] == null) {
 			return;
 		}
 		
@@ -437,9 +444,9 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 		
 		Vector3 firePos = Vector3.zero;
 		Vector3 mousePos = mousePosInput + Vector3.forward * OffsetForward;
-		Vector3 posTmp = Camera.main.ScreenToWorldPoint(mousePos);
+		Vector3 posTmp = GunCamera[1].ScreenToWorldPoint(mousePos);
 		Vector3 ammoForward = Vector3.Normalize( posTmp - ammoSpawnPos );
-		Ray ray = Camera.main.ScreenPointToRay(mousePosInput);
+		Ray ray = GunCamera[1].ScreenPointToRay(mousePosInput);
 		RaycastHit hit;
 		if (!IsPSAutoFire) {
 			firePos = FirePosValTmp * ammoForward + ammoSpawnPos;
@@ -757,9 +764,9 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 
 	void ClickDaoDanBtOneEvent(ButtonState state)
 	{
-		if (XKPlayerCamera.IndexPlayerNum != 0) {
-			return;
-		}
+//		if (XKPlayerCamera.IndexPlayerNum != 0) {
+//			return;
+//		}
 
 		if (XKTriggerClosePlayerUI.IsClosePlayerUI) {
 			return;
@@ -794,7 +801,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 //			return;
 //		}
 
-		if (Camera.main == null) {
+		if (GunCamera[0] == null) {
 			return;
 		}
 		
@@ -833,10 +840,10 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 		
 		Vector3 firePos = Vector3.zero;
 		Vector3 mousePos = mousePosInput + Vector3.forward * OffsetForward;
-		Vector3 posTmp = Camera.main.ScreenToWorldPoint(mousePos);
+		Vector3 posTmp = GunCamera[0].ScreenToWorldPoint(mousePos);
 		Vector3 ammoForward = Vector3.Normalize( posTmp - ammoSpawnPos );
 		firePos = FirePosValTmp * ammoForward + ammoSpawnPos;
-		Ray ray = Camera.main.ScreenPointToRay(mousePosInput);
+		Ray ray = GunCamera[0].ScreenPointToRay(mousePosInput);
 		RaycastHit hit;
 		if (!IsPSAutoFire) {
 			firePos = FirePosValTmp * ammoForward + ammoSpawnPos;
@@ -871,9 +878,9 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 
 	void ClickDaoDanBtTwoEvent(ButtonState state)
 	{
-		if (XKPlayerCamera.IndexPlayerNum != 1) {
-			return;
-		}
+//		if (XKPlayerCamera.IndexPlayerNum != 1) {
+//			return;
+//		}
 
 		if (XKTriggerClosePlayerUI.IsClosePlayerUI) {
 			return;
@@ -908,7 +915,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 //			return;
 //		}
 		
-		if (Camera.main == null) {
+		if (GunCamera[1] == null) {
 			return;
 		}
 		
@@ -947,9 +954,9 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 		
 		Vector3 firePos = Vector3.zero;
 		Vector3 mousePos = mousePosInput + Vector3.forward * OffsetForward;
-		Vector3 posTmp = Camera.main.ScreenToWorldPoint(mousePos);
+		Vector3 posTmp = GunCamera[1].ScreenToWorldPoint(mousePos);
 		Vector3 ammoForward = Vector3.Normalize( posTmp - ammoSpawnPos );
-		Ray ray = Camera.main.ScreenPointToRay(mousePosInput);
+		Ray ray = GunCamera[1].ScreenPointToRay(mousePosInput);
 		RaycastHit hit;
 		if (!IsPSAutoFire) {
 			firePos = FirePosValTmp * ammoForward + ammoSpawnPos;
@@ -1122,7 +1129,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 			return;
 		}
 
-		if (Camera.main == null) {
+		if (GunCamera[0] == null) {
 			return;
 		}
 
@@ -1147,7 +1154,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 			mousePosInput = pcvr.CrossPositionOne;
 		}
 		
-		Ray ray = Camera.main.ScreenPointToRay(mousePosInput);
+		Ray ray = GunCamera[0].ScreenPointToRay(mousePosInput);
 		RaycastHit hit;
 		bool  isAimPlayer = false;
 		if (Physics.Raycast(ray, out hit, FireRayDirLen, XkGameCtrl.GetInstance().PlayerLayer.value)) {
@@ -1182,7 +1189,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 			return;
 		}
 		
-		if (Camera.main == null) {
+		if (GunCamera[1] == null) {
 			return;
 		}
 		
@@ -1207,7 +1214,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 			mousePosInput = pcvr.CrossPositionOne;
 		}
 
-		Ray ray = Camera.main.ScreenPointToRay(mousePosInput);
+		Ray ray = GunCamera[1].ScreenPointToRay(mousePosInput);
 		RaycastHit hit;
 		bool  isAimPlayer = false;
 		if (Physics.Raycast(ray, out hit, FireRayDirLen, XkGameCtrl.GetInstance().PlayerLayer.value)) {
