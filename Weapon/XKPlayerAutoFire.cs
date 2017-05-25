@@ -285,6 +285,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 		if (pcvr.bIsHardWare) {
 			mousePosInput = pcvr.CrossPositionOne;
 		}
+		mousePosInput = GetPlayerMousePos(PlayerEnum.PlayerOne, mousePosInput);
 		
 		Vector3 firePos = Vector3.zero;
 		Vector3 mousePos = mousePosInput + Vector3.forward * OffsetForward;
@@ -441,6 +442,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 		if (pcvr.bIsHardWare) {
 			mousePosInput = pcvr.CrossPositionTwo;
 		}
+		mousePosInput = GetPlayerMousePos(PlayerEnum.PlayerTwo, mousePosInput);
 		
 		Vector3 firePos = Vector3.zero;
 		Vector3 mousePos = mousePosInput + Vector3.forward * OffsetForward;
@@ -837,6 +839,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 		if (pcvr.bIsHardWare) {
 			mousePosInput = pcvr.CrossPositionOne;
 		}
+		mousePosInput = GetPlayerMousePos(PlayerEnum.PlayerOne, mousePosInput);
 		
 		Vector3 firePos = Vector3.zero;
 		Vector3 mousePos = mousePosInput + Vector3.forward * OffsetForward;
@@ -951,6 +954,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 		if (pcvr.bIsHardWare) {
 			mousePosInput = pcvr.CrossPositionTwo;
 		}
+		mousePosInput = GetPlayerMousePos(PlayerEnum.PlayerTwo, mousePosInput);
 		
 		Vector3 firePos = Vector3.zero;
 		Vector3 mousePos = mousePosInput + Vector3.forward * OffsetForward;
@@ -1153,6 +1157,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 		if (pcvr.bIsHardWare) {
 			mousePosInput = pcvr.CrossPositionOne;
 		}
+		mousePosInput = GetPlayerMousePos(PlayerEnum.PlayerOne, mousePosInput);
 		
 		Ray ray = GunCamera[0].ScreenPointToRay(mousePosInput);
 		RaycastHit hit;
@@ -1213,6 +1218,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 		if (pcvr.bIsHardWare) {
 			mousePosInput = pcvr.CrossPositionOne;
 		}
+		mousePosInput = GetPlayerMousePos(PlayerEnum.PlayerTwo, mousePosInput);
 
 		Ray ray = GunCamera[1].ScreenPointToRay(mousePosInput);
 		RaycastHit hit;
@@ -1261,6 +1267,28 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 		PlayerAmmoCtrl ammoScript = obj.GetComponent<PlayerAmmoCtrl>();
 		ammoScript.SetIsDonotHurtNpc(true);
 		ammoScript.StartMoveAmmo(firePos, PlayerEnum.Null);
+	}
+
+	Vector3 GetPlayerMousePos(PlayerEnum indexVal, Vector3 pos)
+	{
+		float swMaxP1 = Screen.width * 0.5f;
+		float swMinP1 = 0;
+		float swMaxP2 = Screen.width;
+		float swMinP2 = swMaxP1;
+		float px = pos.x;
+		switch (indexVal) {
+		case PlayerEnum.PlayerOne:
+			px = px > swMaxP1 ? swMaxP1 : px;
+			px = px < swMinP1 ? swMinP1 : px;
+			pos = new Vector3(px, pos.y, 0);
+			break;
+		case PlayerEnum.PlayerTwo:
+			px = px > swMaxP2 ? swMaxP2 : px;
+			px = px < swMinP2 ? swMinP2 : px;
+			pos = new Vector3(px, pos.y, 0);
+			break;
+		}
+		return pos;
 	}
 
 	/*public List<AmmoParticleDt> AmmoParticleList;
