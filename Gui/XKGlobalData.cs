@@ -78,6 +78,8 @@ public class XKGlobalData {
 				HandleJsonObj.WriteToFileXml(FileName, "GameAudioVolume", val);
 			}
 			GameAudioVolume = Convert.ToInt32(val);
+			GameAudioVolume = 0; //test.
+			AudioListener.volume = (float)XKGlobalData.GameAudioVolume / 10f;
 		}
 		return Instance;
 	}
