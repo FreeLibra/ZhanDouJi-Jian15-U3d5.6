@@ -37,33 +37,33 @@ public class XkGameCtrl : MonoBehaviour {
 	/**
 	 * YouLiangDianMin -> 油量点即为玩家的血值.
 	 */
-	[Range(1, 1000)] public int YouLiangDianMin = 50;
+	[Range(1, 100000)] public int YouLiangDianMin = 50;
 	/**
-	 * YouLiangDianMinSR -> 椋炴満涓昏?鍙屼汉娌归噺鐐疙
+	 * YouLiangDianMinSR -> 飞机主角双人油量点.
 	 */
-	[Range(1, 1000)] public int YouLiangDianMinSR = 50;
+	[Range(1, 100000)] public int YouLiangDianMinSR = 50;
 	/**
-	 * YouLiangDianMinLJ -> 椋炴満涓昏?鑱旀満鍗曚汉娌归噺鐐疙
+	 * YouLiangDianMinLJ -> 飞机主角联机单人油量点.
 	 */
 	[Range(1, 1000)] int YouLiangDianMinLJ = 50;
 	/**
-	 * YouLiangDianMinLJSR -> 椋炴満涓昏?鑱旀満鍙屼汉娌归噺鐐疙
+	 * YouLiangDianMinLJSR -> 飞机主角联机双人油量点.
 	 */
 	[Range(1, 1000)] int YouLiangDianMinLJSR = 50;
 	/**
-	 * YouLiangDianMin -> 鍧﹀厠涓昏?鍗曚汉娌归噺鐐疙
+	 * YouLiangDianMin ->  坦克主角单人油量点.
 	 */
 	[Range(1, 1000)] int TKYouLiangDianMin = 50;
 	/**
-	 * YouLiangDianMinSR -> 鍧﹀厠涓昏?鍙屼汉娌归噺鐐疙
+	 * YouLiangDianMinSR -> 坦克主角双人油量点.
 	 */
 	[Range(1, 1000)] int SRTKYouLiangDianMin = 50;
 	/**
-	 * YouLiangDianMinLJ -> 鍧﹀厠涓昏?鑱旀満鍗曚汉娌归噺鐐疙
+	 * YouLiangDianMinLJ -> 坦克主角联机单人油量点.
 	 */
 	[Range(1, 1000)] int LJTKYouLiangDianMin = 50;
 	/**
-	 * YouLiangDianMinLJSR -> 鍧﹀厠涓昏?鑱旀満鍙屼汉娌归噺鐐疙
+	 * YouLiangDianMinLJSR -> 坦克主角联机双人油量点.
 	 */
 	[Range(1, 1000)] int LJSRTKYouLiangDianMin = 50;
 	int YouLiangDianVal;
@@ -80,9 +80,9 @@ public class XkGameCtrl : MonoBehaviour {
 //	AiPathCtrl TanKePlayerPath;
 	public GameObject CartoonCamPlayer;
 	public AiMark CartoonCamPlayerMark;
-//	GameObject ServerCamera; //鏈嶅姟鍣ㄩ?鏈烘憚鍍忔満.
+//	GameObject ServerCamera; //服务器飞机摄像机.
 	public static GameObject ServerCameraObj;
-//	GameObject ServerCameraTK; //鏈嶅姟鍣ㄥ潶鍏嬫憚鍍忔満.
+//	GameObject ServerCameraTK; //服务器坦克摄像机.
 	public static GameObject ServerCameraObjTK;
 	Transform CartoonCamPlayerTran;
 	int CartoonCamMarkIndex = 1;
@@ -1233,6 +1233,18 @@ public class XkGameCtrl : MonoBehaviour {
 		float valTmp = (float)YouLiangDianVal / youLiangDianTmp;
 		if (YouLiangAddCtrl.GetInstance() != null) {
 			YouLiangAddCtrl.GetInstance().SetYouLiangSpriteAmount(valTmp);
+		}
+	}
+
+	public void SubGamePlayerHealth(int playerDamage, PlayerEnum playerIndex)
+	{
+		if (PlayerYouLiangCur <= 0f) {
+			return;
+		}
+
+		PlayerYouLiangCur -= playerDamage;
+		if (PlayerYouLiangCur <= 0f) {
+			PlayerYouLiangCur = 0f;
 		}
 	}
 

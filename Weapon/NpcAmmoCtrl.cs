@@ -35,13 +35,16 @@ public class NpcAmmoCtrl : MonoBehaviour {
 	{
 		ObjAmmo = gameObject;
 		AmmoTran = transform;
-		if (LifeTime <= 0) {
-			Invoke("DelayRemoveNpcAmmo", 10f);
+		SpawnTime = Time.time;
+		if (AmmoType == PlayerAmmoType.GenZongAmmo) {
+			if (LifeTime <= 0) {
+				Invoke("DelayRemoveNpcAmmo", 10f);
+			}
+			else {
+				Invoke("DelayRemoveNpcAmmo", LifeTime);
+			}
+			Invoke("DelayAddNpcAmmoList", 0.05f);
 		}
-		else {
-			Invoke("DelayRemoveNpcAmmo", LifeTime);
-		}
-		Invoke("DelayAddNpcAmmoList", 0.05f);
 		SetGenZongDanInfo();
 	}
 
@@ -386,6 +389,8 @@ public class NpcAmmoCtrl : MonoBehaviour {
 		}
 	}
 
+	//npc子弹打中玩家的概率值.
+	[Range(0, 100)]public float AmmoHitPlayer = 50;
 	void MoveAmmoOnCompelteITween()
 	{
 		//Debug.Log("MoveAmmoOnCompelteITween...");
@@ -393,6 +398,11 @@ public class NpcAmmoCtrl : MonoBehaviour {
 			return;
 		}
 		IsOnFinishMove = true;
+
+		float randVal = Random.Range(0, 1000) % 100;
+		if (randVal < AmmoHitPlayer) {
+			XkGameCtrl.GetInstance().SubGamePlayerHealth(PlayerDamage, IndexPlayerAim);
+		}
 		//SpawnAmmoParticleObj();
 		CancelInvoke("DelayRemoveNpcAmmo");
 		RemoveAmmo();
@@ -497,6 +507,13 @@ public class NpcAmmoCtrl : MonoBehaviour {
 		XkGameCtrl.AddNpcAmmoList(gameObject);
 	}
 
+	/**
+	 * npc子弹对玩家的伤害值.
+	 */
+	[Range(0f, 10000f)]public int PlayerDamage = 1;
+	/**
+	 * npc子弹的生命值.
+	 */
 	[Range(0f, 1000f)]public float AmmoHealth = 0f;
 	/**
 	 * MuBiaoXuanDing == 0 -> 随机选择.
@@ -539,7 +556,7 @@ public class NpcAmmoCtrl : MonoBehaviour {
 
 	void AmmoGenZongDanUpdate()
 	{
-		if (Time.realtimeSinceStartup > SpawnTime + LifeTime) {
+		if (Time.time > SpawnTime + LifeTime) {
 			DestroyNpcAmmo(ObjAmmo);
 			return;
 		}
@@ -578,10 +595,14 @@ public class NpcAmmoCtrl : MonoBehaviour {
 				continue;
 			}
 			
-//			XKPlayerMoveCtrl playerScript = c.GetComponent<XKPlayerMoveCtrl>();
+			XKPlayerCamera playerScript = c.GetComponent<XKPlayerCamera>();
+			if (playerScript != null/* && !playerScript.GetIsWuDiState()*/) {
+				XkGameCtrl.GetInstance().SubGamePlayerHealth(PlayerDamage, IndexPlayerAim);
+			}
 //			if (playerScript != null && !playerScript.GetIsWuDiState()) {
 //				XkGameCtrl.GetInstance().SubGamePlayerHealth(playerScript.PlayerIndex, PlayerDamage);
 //			}
+
 			// Get the rigidbody if any
 			if (c.GetComponent<Rigidbody>()) {
 				// Apply force to the target object
