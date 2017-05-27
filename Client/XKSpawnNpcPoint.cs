@@ -4,6 +4,11 @@ using System.Collections.Generic;
 
 public class XKSpawnNpcPoint : MonoBehaviour {
 	public SpawnPointType PointType = SpawnPointType.KongZhong;
+	/**
+	 * PointPlayerSt == PlayerEnum.Null -> 任何玩家激活时,都会产生Npc.
+	 * PointPlayerSt == PlayerEnum.PlayerOne -> 玩家1激活时,产生Npc.
+	 * PointPlayerSt == PlayerEnum.PlayerTwo -> 玩家2激活时,产生Npc.
+	 */
 	public PlayerEnum PointPlayerSt = PlayerEnum.PlayerOne;
 	public bool IsAimFeiJiPlayer;
 //	public Transform HuoCheNpcTran;
@@ -13,7 +18,7 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 	public bool IsLoopFirePoint;
 	bool IsHuoCheNpc;
 	public bool IsAimPlayer; //fire
-	public bool IsDoublePlayer;
+//	public bool IsDoublePlayer;
 	public Transform[] ChildSpawnPoint;
 	public GameObject NpcFangZhen; //用于方阵npc的攻击点逻辑.
 	[Range(0.1f, 100f)] public float MvSpeed = 1f;
@@ -286,12 +291,17 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 			return;
 		}
 
-		if (PointPlayerSt == PlayerEnum.Null) {
-			return;
-		}
+//		if (PointPlayerSt == PlayerEnum.Null) {
+//			return;
+//		}
 
 		if (Network.peerType == NetworkPeerType.Disconnected) {
 			switch (PointPlayerSt) {
+			case PlayerEnum.Null:
+				if (!XkGameCtrl.IsActivePlayerOne && !XkGameCtrl.IsActivePlayerTwo) {
+					return;
+				}
+				break;
 			case PlayerEnum.PlayerOne:
 				if (!XkGameCtrl.IsActivePlayerOne) {
 					return;
@@ -320,16 +330,16 @@ public class XKSpawnNpcPoint : MonoBehaviour {
             }
 		}
 
-		if (ScreenDanHeiCtrl.IsStartGame) {
-			if ((XkGameCtrl.GameModeVal == GameMode.DanJiFeiJi && PointType == SpawnPointType.DiMian)
-			    || (XkGameCtrl.GameModeVal == GameMode.DanJiTanKe && PointType == SpawnPointType.KongZhong)) {
-				return;
-			}
+//		if (ScreenDanHeiCtrl.IsStartGame) {
+//			if ((XkGameCtrl.GameModeVal == GameMode.DanJiFeiJi && PointType == SpawnPointType.DiMian)
+//			    || (XkGameCtrl.GameModeVal == GameMode.DanJiTanKe && PointType == SpawnPointType.KongZhong)) {
+//				return;
+//			}
 			
-			if (IsDoublePlayer && (!XkGameCtrl.IsActivePlayerOne || !XkGameCtrl.IsActivePlayerTwo)) {
-				return;
-			}
-		}
+//			if (IsDoublePlayer && (!XkGameCtrl.IsActivePlayerOne || !XkGameCtrl.IsActivePlayerTwo)) {
+//				return;
+//			}
+//		}
 		
 		GameObject obj = null;
 		XKHuoCheCtrl hcScript = NpcObj.GetComponent<XKHuoCheCtrl>();

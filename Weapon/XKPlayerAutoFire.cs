@@ -8,6 +8,7 @@ public enum PlayerAmmoType
 	PuTongAmmo,
 	GaoBaoAmmo,
 	DaoDanAmmo,
+	GenZongAmmo,	//跟踪弹.
 }
 
 public class XKPlayerAutoFire : MonoBehaviour {

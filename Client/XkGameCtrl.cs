@@ -1886,6 +1886,76 @@ public class XkGameCtrl : MonoBehaviour {
 		}
 		return playerCamera.GetPlayerScript();
 	}
+	
+	public PlayerEnum GetRandAimPlayerObj()
+	{
+		if (!IsActivePlayerOne && !IsActivePlayerTwo ) {
+			return PlayerEnum.Null;
+		}
+
+		int count = 0;
+		int randVal = Random.Range(0, 100) % 2;
+		PlayerEnum indexPlayer = PlayerEnum.Null;
+		do {
+			switch (randVal) {
+			case 0:
+				if (XkGameCtrl.IsActivePlayerOne) {
+					indexPlayer = (PlayerEnum)(randVal + 1);
+				}
+				break;
+				
+			case 1:
+				if (XkGameCtrl.IsActivePlayerTwo) {
+					indexPlayer = (PlayerEnum)(randVal + 1);
+				}
+				break;
+			}
+			
+			if (indexPlayer != PlayerEnum.Null) {
+				break;
+			}
+			randVal = Random.Range(0, 100) % 2;
+			count++;
+			if (count > 4) {
+				break;
+			}
+		} while (indexPlayer == PlayerEnum.Null);
+		//Debug.Log("GetRandAimPlayerObj -> player "+indexPlayer);
+		return indexPlayer;
+	}
+
+	public PlayerEnum GetMaxHealthPlayer()
+	{
+		PlayerEnum indexPlayer = PlayerEnum.PlayerOne;
+		if (IsActivePlayerTwo) {
+			indexPlayer = PlayerEnum.PlayerTwo;
+		}
+		return indexPlayer;
+//		GameObject playerObj = null;
+//		List<float> healthList = new List<float>(PlayerHealthArray);
+//		healthList.Sort();
+//		healthList.Reverse();
+//		for (int j = 0; j < 4; j++) {
+//			if (XkGameCtrl.PlayerJiFenArray[0] == healthList[j]) {
+//				switch (j) {
+//				case 0:
+//					playerObj = XKPlayerMoveCtrl.GetInstancePOne().GenZongDanAimPoint;
+//					break;
+//				case 1:
+//					playerObj = XKPlayerMoveCtrl.GetInstancePTwo().GenZongDanAimPoint;
+//					break;
+//				case 2:
+//					playerObj = XKPlayerMoveCtrl.GetInstancePThree().GenZongDanAimPoint;
+//					break;
+//				case 3:
+//					playerObj = XKPlayerMoveCtrl.GetInstancePFour().GenZongDanAimPoint;
+//					break;
+//				}
+//				break;
+//			}
+//		}
+//		return playerObj;
+	}
 
 	void OnGUI()
 	{

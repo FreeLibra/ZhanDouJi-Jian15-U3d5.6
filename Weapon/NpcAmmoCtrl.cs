@@ -42,10 +42,15 @@ public class NpcAmmoCtrl : MonoBehaviour {
 			Invoke("DelayRemoveNpcAmmo", LifeTime);
 		}
 		Invoke("DelayAddNpcAmmoList", 0.05f);
+		SetGenZongDanInfo();
 	}
 
 	void Update()
 	{
+		if (AmmoType == PlayerAmmoType.GenZongAmmo) {
+			AmmoGenZongDanUpdate();
+		}
+
 		if (IsOnFinishMove) {
 			return;
 		}
@@ -490,5 +495,118 @@ public class NpcAmmoCtrl : MonoBehaviour {
 			return;
 		}
 		XkGameCtrl.AddNpcAmmoList(gameObject);
+	}
+
+	[Range(0f, 1000f)]public float AmmoHealth = 0f;
+	/**
+	 * MuBiaoXuanDing == 0 -> 随机选择.
+	 * MuBiaoXuanDing == 1 -> 当前血量最高玩家.
+	 */
+	[Range(0, 1)]public int MuBiaoXuanDing = 0;
+	[Range(0f, 90f)]public float ShanXingJiaoDu = 45f;
+	float CosJiaoDuGZ;
+	public LayerMask IgnoreLayers;
+	const float HitRadius = 1.0f;
+	//延迟跟踪转向时间.
+	float SeekPrecision = 1.3f;
+	Vector3 DirAmmo;
+	float SpawnTime;
+	GameObject TargetObject;
+//	public GameObject TestTarget;
+	float forceAmount = 10f;
+	PlayerEnum IndexPlayerAim;
+
+	void SetGenZongDanInfo()
+	{
+		if (AmmoType != PlayerAmmoType.GenZongAmmo) {
+			return;
+		}
+
+		CosJiaoDuGZ = Mathf.Cos(ShanXingJiaoDu);
+		if (XkGameCtrl.GetInstance() != null) {
+			switch (MuBiaoXuanDing) {
+			case 1:
+				IndexPlayerAim = XkGameCtrl.GetInstance().GetMaxHealthPlayer();
+				break;
+			default:
+				IndexPlayerAim = XkGameCtrl.GetInstance().GetRandAimPlayerObj();
+				break;
+			}
+		}
+		TargetObject = XKPlayerCamera.GetInstanceFeiJi().gameObject;
+		//TargetObject = TestTarget; //test
+	}
+
+	void AmmoGenZongDanUpdate()
+	{
+		if (Time.realtimeSinceStartup > SpawnTime + LifeTime) {
+			DestroyNpcAmmo(ObjAmmo);
+			return;
+		}
+
+		bool isGenZong = false;
+		if (TargetObject) {
+			Vector3 targetPos = TargetObject.transform.position;
+			float cosVal = 0f;
+			Vector3 vecA = AmmoTran.forward;
+			Vector3 vecB = targetPos - AmmoTran.position;
+			vecB.y = vecA.y = 0f;
+			cosVal = Vector3.Dot(vecA, vecB.normalized);
+			if (cosVal > CosJiaoDuGZ) {
+				isGenZong = true;
+				//targetPos += transform.right * (Mathf.PingPong (Time.time, 1.0f) - 0.5f) * noise;
+				Vector3 targetDirAmmo = (targetPos - AmmoTran.position);
+				float targetDist = targetDirAmmo.magnitude;
+				targetDirAmmo /= targetDist;
+				
+				DirAmmo = Vector3.Slerp (DirAmmo, targetDirAmmo, Time.deltaTime * SeekPrecision);
+				AmmoTran.rotation = Quaternion.LookRotation(DirAmmo);
+				AmmoTran.position += (DirAmmo * MvSpeed) * Time.deltaTime;
+			}
+		}
+
+		if (!isGenZong) {
+			AmmoTran.position += (AmmoTran.forward * MvSpeed) * Time.deltaTime;
+		}
+		
+		// Check if this one hits something
+		Collider[] hits = Physics.OverlapSphere(AmmoTran.position, HitRadius, ~IgnoreLayers.value);
+		bool collided = false;
+		foreach (Collider c in hits) {
+			// Don't collide with triggers
+			if (c.isTrigger) {
+				continue;
+			}
+			
+//			XKPlayerMoveCtrl playerScript = c.GetComponent<XKPlayerMoveCtrl>();
+//			if (playerScript != null && !playerScript.GetIsWuDiState()) {
+//				XkGameCtrl.GetInstance().SubGamePlayerHealth(playerScript.PlayerIndex, PlayerDamage);
+//			}
+			// Get the rigidbody if any
+			if (c.GetComponent<Rigidbody>()) {
+				// Apply force to the target object
+				Vector3 force = AmmoTran.forward * forceAmount;
+				force.y = 0f;
+				c.GetComponent<Rigidbody>().AddForce (force, ForceMode.Impulse);
+			}
+			collided = true;
+		}
+		
+		if (collided) {
+			if (AmmoExplode != null) {
+				GameObject expObj = (GameObject)Instantiate(AmmoExplode, AmmoTran.position, AmmoTran.rotation);
+				if (XkGameCtrl.NpcAmmoArray != null) {
+					expObj.transform.parent = XkGameCtrl.NpcAmmoArray;
+				}
+			}
+			DestroyNpcAmmo(ObjAmmo);
+		}
+	}
+	
+	void DestroyNpcAmmo(GameObject ammoObj)
+	{
+		if (ammoObj != null) {
+			Destroy(ammoObj);
+		}
 	}
 }

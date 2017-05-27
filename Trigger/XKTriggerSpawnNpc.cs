@@ -63,7 +63,7 @@ public class XKTriggerSpawnNpc : MonoBehaviour {
 //			return;
 //		}
 
-//		Debug.Log("XKTriggerSpawnNpc::OnTriggerEnter -> hit "+other.name);
+		//Debug.Log("XKTriggerSpawnNpc::OnTriggerEnter -> hit "+other.name);
 		for (int i = 0; i < SpawnPointArray.Length; i++) {
 			SpawnPointArray[i].SpawnPointAllNpc();
 		}
