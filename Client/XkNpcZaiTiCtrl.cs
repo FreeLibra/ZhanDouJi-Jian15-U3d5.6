@@ -256,7 +256,10 @@ public class XkNpcZaiTiCtrl : MonoBehaviour {
 					AudioTeShuNpcFire[i].Play();
 				}
 
-				if (AmmoLZPrefabTeShu != null && AmmoLZPrefabTeShu[i] != null && AmmoLZObjTeShu[i] == null) {
+				if (AmmoLZPrefabTeShu != null &&
+				    AmmoLZPrefabTeShu.Length >= TimeTeShuFire.Length &&
+				    AmmoLZPrefabTeShu[i] != null &&
+				    AmmoLZObjTeShu[i] == null) {
 					obj = (GameObject)Instantiate(AmmoLZPrefabTeShu[i],
 					                              AmmoSpawnTranTeShu[i].position, AmmoSpawnTranTeShu[i].rotation);
 					

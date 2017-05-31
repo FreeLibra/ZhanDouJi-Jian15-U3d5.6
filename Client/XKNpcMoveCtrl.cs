@@ -152,7 +152,11 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 			}
 		}
 
-		if (!IsDoFireAnimation && !IsFangZhenNpc && !IsDoFireAniZaiTi && NpcState != NpcType.FlyNpc) {
+		if (!IsDoFireAnimation && 
+		    !IsFangZhenNpc && 
+		    !IsDoFireAniZaiTi && 
+		    FireDistance > 0f &&
+		    NpcState != NpcType.FlyNpc) {
 			Vector3 posA = NpcTran.position;
 			Vector3 posB = Vector3.zero;
 			switch (XkGameCtrl.GameModeVal) {
