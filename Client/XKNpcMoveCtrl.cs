@@ -1629,7 +1629,13 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 	{
 		//Debug.Log("valDis "+val);
 		FireDistance = val;
-		IsDoFireAnimation = true;
+		if (val < 0) {
+			//关闭开火逻辑.
+			IsDoFireAnimation = false;
+		}
+		else {
+			IsDoFireAnimation = true;
+		}
 	}
 
 	public void SetHuoCheNpcInfo(int indexPoint)
