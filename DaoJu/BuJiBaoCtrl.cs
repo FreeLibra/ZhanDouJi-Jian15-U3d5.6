@@ -5,8 +5,9 @@ public enum BuJiBaoType
 {
 	Null,
 	DaoDan,
-	GaoBaoDan,
-	YouLiang,
+	GaoBaoDan,		//歼-15项目暂时没提,先默认改为DaoDan.
+	YouLiang,		//补给包,增加玩家血量或油量.
+	YouErDan,		//诱饵弹,对npc的导弹进行拦截.
 }
 
 public enum PlayerEnum
@@ -29,6 +30,10 @@ public class BuJiBaoCtrl : MonoBehaviour {
 //		NetworkViewCom = GetComponent<NetworkView>();
 		if (transform.parent != XkGameCtrl.MissionCleanup) {
 			transform.parent = XkGameCtrl.MissionCleanup;
+		}
+
+		if (BuJiBao == BuJiBaoType.GaoBaoDan) {
+			BuJiBao = BuJiBaoType.DaoDan;
 		}
 	}
 
