@@ -11,10 +11,10 @@ public class XkNpcZaiTiCtrl : MonoBehaviour {
 	public AudioSource AudioNpcFire;
 	public GameObject AmmoLiZiPrefab;
 	public Transform AmmoSpawnTran;
-	/**************************************************
+	/**
 	 * 该NPC为特殊NPC，在做Fire动作时，需要有两个点同时发射子弹，且每个点的子弹发射频率分别可调.
 	 * 只要当该NPC做Fire动作时，即发射子弹，也就是说在一次Fire动作中可能会发射多次子弹.
-	 **************************************************/
+	 */
 	public bool IsTeShuFireNpc;
 	public float[] TimeFireAmmo;//发射子弹间隔时间.
 	public GameObject[] AmmoPrefabTeShu;
@@ -24,7 +24,11 @@ public class XkNpcZaiTiCtrl : MonoBehaviour {
 	public Transform[] AmmoSpawnTranTeShu;
 	public GameObject DeathExplode;
 	public Transform DeathExplodePoint;
-	public NpcPathCtrl AmmoMovePath; //拍摄循环动画时，使子弹可以做抛物线运动.
+	/**
+	 * 拍摄循环动画时，使子弹可以做抛物线运动.
+	 * 子弹路径可以选择为同一条,也可以设置为不同的.
+	 */
+	public NpcPathCtrl[] AmmoMovePath;
 	bool IsZaiTiNpc;
 	bool IsDeathNPC;
 	GameObject NpcObj;
@@ -309,7 +313,7 @@ public class XkNpcZaiTiCtrl : MonoBehaviour {
 								buJiBaoScript.RemoveBuJiBao(PlayerEnum.Null); //buJiBaoScript
 							}
 						}
-						ammoScript.StartMoveAmmo(firePos, PlayerEnum.Null, AmmoMovePath);
+						ammoScript.StartMoveAmmo(firePos, PlayerEnum.Null, AmmoMovePath[i]);
 					}
 				}
 
