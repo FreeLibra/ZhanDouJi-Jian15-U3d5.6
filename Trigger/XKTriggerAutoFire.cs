@@ -4,11 +4,22 @@ using UnityEngine;
 
 public class XKTriggerAutoFire : MonoBehaviour
 {
+	/**
+	 * 队友npc的产生点.
+	 */
 	public XKSpawnNpcPoint SpawnPoint;
 	/**
 	 * 队友npc发射普通子弹的持续时间.
 	 */
 	[Range(0, 1000)] public float TimeFirePT = 3;
+	/**
+	 * 发射导弹的数量.
+	 */
+	[Range(0, 1000)] public int DaoDanNum = 0;
+	/**
+	 * 导弹攻击的npc产生点.
+	 */
+	public XKSpawnNpcPoint SpawnPointDaoDanAim;
 	public AiPathCtrl TestPlayerPath;
 	// Use this for initialization
 	void Start()
@@ -67,6 +78,11 @@ public class XKTriggerAutoFire : MonoBehaviour
 		XKNpcMoveCtrl npcScript = npcObj.GetComponent<XKNpcMoveCtrl>();
 		if (npcScript != null) {
 			npcScript.SetFireDistance(0);
+		}
+
+		XKNpcSpawnAmmoCtrl npcSpawnAmmo = npcObj.GetComponent<XKNpcSpawnAmmoCtrl>();
+		if (npcSpawnAmmo != null) {
+			npcSpawnAmmo.StartSpawnNpcAmmo(DaoDanNum);
 		}
 
 		if (TimeFirePT > 0) {

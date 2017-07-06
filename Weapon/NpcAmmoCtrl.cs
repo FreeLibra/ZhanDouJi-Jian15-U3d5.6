@@ -45,6 +45,7 @@ public class NpcAmmoCtrl : MonoBehaviour {
 			}
 			Invoke("DelayAddNpcAmmoList", 0.05f);
 		}
+		
 		SetGenZongDanInfo();
 	}
 
@@ -95,6 +96,10 @@ public class NpcAmmoCtrl : MonoBehaviour {
 
 	public void SetIsAimFeiJiPlayer(bool isAimFeiJi)
 	{
+		if (AmmoType == PlayerAmmoType.GenZongAmmo) {
+			return;
+		}
+
 		if (!ObjAmmo.activeSelf) {
 			ObjAmmo.SetActive(true);
 			if (IsInvoking("CheckNpcAmmoState")) {
@@ -629,5 +634,10 @@ public class NpcAmmoCtrl : MonoBehaviour {
 		if (ammoObj != null) {
 			Destroy(ammoObj);
 		}
+	}
+
+	public void SetAmmoTargetObject(GameObject obj)
+	{
+		TargetObject = obj;
 	}
 }
