@@ -10,6 +10,11 @@ public enum PlayerTypeEnum
 }
 
 public class XkPlayerCtrl : MonoBehaviour {
+	/**
+	 * PlayerCameraAy[0] -> 玩家1.
+	 * PlayerCameraAy[1] -> 玩家2.
+	 */
+	public Camera[] PlayerCameraAy;
 	public GameObject LvDengObj;
 	public GameObject HongDengObj;
 	AiPathCtrl AiPathScript;
