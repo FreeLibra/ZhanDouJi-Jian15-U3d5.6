@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ZhunXingCtrl : MonoBehaviour {
 	public PlayerEnum PlayerSt;
-	public UISprite ZhunXingSprite;
+	UISprite ZhunXingSprite;
 	GameObject ZhunXingObj;
 	Transform ZhunXingTran;
 	bool IsFixZhunXing;
@@ -31,6 +31,7 @@ public class ZhunXingCtrl : MonoBehaviour {
 	{
 		ZhunXingTran = transform;
 		ZhunXingObj = gameObject;
+		ZhunXingSprite = GetComponent<UISprite>();
 		switch (PlayerSt) {
 		case PlayerEnum.PlayerOne:
 			_InstanceOne = this;
@@ -72,8 +73,13 @@ public class ZhunXingCtrl : MonoBehaviour {
 			}
 		}
 		else {
-			mousePosInput.x *= (ScreenUIWith / Screen.width);
+			mousePosInput.x *= (ScreenUIWith / (0.5f * Screen.width));
 			mousePosInput.y *= (ScreenUIHeight / Screen.height);
+		}
+
+		byte IndexValZX = (byte)((byte)PlayerSt - 1);
+		if (IndexValZX == 1) {
+			mousePosInput.x -= 1360;
 		}
 
 		if(IsFixZhunXing != Screen.fullScreen) {
@@ -169,8 +175,8 @@ public class ZhunXingCtrl : MonoBehaviour {
 			else {
 				if (XkGameCtrl.GaoBaoDanNumPOne <= 0) {
 					ZhunXingSprite.spriteName = "ZhunXingP1_0";
-					ZhunXingSprite.width = 166;
-					ZhunXingSprite.height = 166;
+					ZhunXingSprite.width = 156;
+					ZhunXingSprite.height = 156;
 				}
 				else {
 					ZhunXingSprite.spriteName = "ZhunXingP1_1";
@@ -189,8 +195,8 @@ public class ZhunXingCtrl : MonoBehaviour {
 			else {
 				if (XkGameCtrl.GaoBaoDanNumPTwo <= 0) {
 					ZhunXingSprite.spriteName = "ZhunXingP2_0";
-					ZhunXingSprite.width = 166;
-					ZhunXingSprite.height = 166;
+					ZhunXingSprite.width = 156;
+					ZhunXingSprite.height = 156;
 				}
 				else {
 					ZhunXingSprite.spriteName = "ZhunXingP2_1";
