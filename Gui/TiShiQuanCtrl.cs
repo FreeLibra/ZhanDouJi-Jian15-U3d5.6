@@ -32,7 +32,9 @@ public class TiShiQuanCtrl : MonoBehaviour
 		Vector3 pos = CameraMain.WorldToScreenPoint(FollowTr.position);
 		pos.z = 0f;
 		pos.x = (XkGameCtrl.ScreenWidth * pos.x) / (0.5f * Screen.width);
-		pos.x -= 1360 * IndexVal;
+		if (IndexVal == 1) {
+			pos.x -= 1360 * IndexVal;
+		}
 		pos.y = (XkGameCtrl.ScreenHeight * pos.y) / Screen.height;
 		transform.localPosition = pos;
 	}

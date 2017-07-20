@@ -12,6 +12,7 @@ public class ZhunXingCtrl : MonoBehaviour {
 	GameMode ZXModeVal = GameMode.Null;
 	static ZhunXingCtrl _InstanceOne;
 	static ZhunXingCtrl _InstanceTwo;
+	byte IndexValZX;
 	public static int SM_CXSCREEN = 0;
 	public static int SM_CYSCREEN = 1;
 	[DllImport("user32")]
@@ -31,6 +32,7 @@ public class ZhunXingCtrl : MonoBehaviour {
 	{
 		ZhunXingTran = transform;
 		ZhunXingObj = gameObject;
+		IndexValZX = (byte)((byte)PlayerSt - 1);
 		ZhunXingSprite = GetComponent<UISprite>();
 		switch (PlayerSt) {
 		case PlayerEnum.PlayerOne:
@@ -77,10 +79,15 @@ public class ZhunXingCtrl : MonoBehaviour {
 			mousePosInput.y *= (ScreenUIHeight / Screen.height);
 		}
 
-		byte IndexValZX = (byte)((byte)PlayerSt - 1);
 		if (IndexValZX == 1) {
 			mousePosInput.x -= 1360;
 		}
+
+		mousePosInput.x = mousePosInput.x < 0 ? 0 : mousePosInput.x;
+		mousePosInput.x = mousePosInput.x > 1360 ? 1360 : mousePosInput.x;
+
+		mousePosInput.y = mousePosInput.y < 0 ? 0 : mousePosInput.y;
+		mousePosInput.y = mousePosInput.y > 768 ? 768 : mousePosInput.y;
 
 		if(IsFixZhunXing != Screen.fullScreen) {
 			IsFixZhunXing = Screen.fullScreen;
