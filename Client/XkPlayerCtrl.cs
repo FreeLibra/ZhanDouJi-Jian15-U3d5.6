@@ -10,11 +10,6 @@ public enum PlayerTypeEnum
 }
 
 public class XkPlayerCtrl : MonoBehaviour {
-	/**
-	 * PlayerCameraAy[0] -> 玩家1.
-	 * PlayerCameraAy[1] -> 玩家2.
-	 */
-	public Camera[] PlayerCameraAy;
 	public GameObject LvDengObj;
 	public GameObject HongDengObj;
 	AiPathCtrl AiPathScript;
@@ -238,6 +233,11 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 	public void SetPlayerAutoFireScript(XKPlayerAutoFire script)
 	{
 		PlayerAutoFireScript = script;
+	}
+
+	public XKPlayerAutoFire GetPlayerAutoFireScript()
+	{
+		return PlayerAutoFireScript;
 	}
 
 	public void SpawnPlayerDaoDan(Transform ammoTran, GameObject playerDaoDan)

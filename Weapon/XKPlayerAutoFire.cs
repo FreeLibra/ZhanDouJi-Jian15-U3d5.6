@@ -19,6 +19,8 @@ public class XKPlayerAutoFire : MonoBehaviour {
 	 */
 	public TweenRotation[] QiangGuanTwRot;
 	/**
+	 * GunCamera[0] -> 玩家1.
+	 * GunCamera[1] -> 玩家2.
 	 * 玩家子弹落点计算摄像机.
 	 */
 	public Camera[] GunCamera;

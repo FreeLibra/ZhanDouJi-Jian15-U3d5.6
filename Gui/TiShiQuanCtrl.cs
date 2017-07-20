@@ -13,7 +13,8 @@ public class TiShiQuanCtrl : MonoBehaviour
 	{
 		IndexVal = (byte)((byte)IndexPlayer - 1);
 		if (IndexVal >= 0 && IndexVal <= 1) {
-			CameraMain = XkPlayerCtrl.GetInstanceFeiJi().PlayerCameraAy[IndexVal];
+			XKPlayerAutoFire playerAutoFire = XkPlayerCtrl.GetInstanceFeiJi().GetPlayerAutoFireScript();
+			CameraMain = playerAutoFire.GunCamera[IndexVal];
 		}
 	}
 	
