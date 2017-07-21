@@ -135,20 +135,6 @@ public class BuJiBaoCtrl : MonoBehaviour {
 		DestroyNetObj(gameObject);
 	}
 
-//	[RPC] void BuJiBaoSendRemoveObj()
-//	{
-//		if (IsDeath) {
-//			return;
-//		}
-//		IsDeath = true;
-//
-//		if (ExplodeObj != null) {
-//			GameObject obj = (GameObject)Instantiate(ExplodeObj, transform.position, transform.rotation);
-//			XkGameCtrl.CheckObjDestroyThisTimed(obj);
-//		}
-//		DestroyNetObj(gameObject);
-//	}
-
 	void DestroyNetObj(GameObject obj)
 	{
 		if (Network.peerType == NetworkPeerType.Disconnected) {
